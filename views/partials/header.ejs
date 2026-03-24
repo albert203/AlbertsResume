@@ -1,0 +1,28 @@
+// header partial view for the portfolio page
+
+<style>
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--primary-color);
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+  }
+</style>
+
+<nav class="navbar">
+  <div class="logo">Albert's Profile</div>
+  <ul>
+    <li><a href="/resume"></a></li>
+    <li><a href="/cover-letter"></a></li>
+    <li>
+      <button id="download-btn" onclick="window.print()">Download PDF</button>
+    </li>
+  </ul>
+</nav>
