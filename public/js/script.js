@@ -28,7 +28,7 @@ dots.forEach(dot => {
 // };
 
 
-const sections = document.querySelectorAll('.hero, .about');
+const sections = document.querySelectorAll('.hero, .about, .experience, .projects');
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {

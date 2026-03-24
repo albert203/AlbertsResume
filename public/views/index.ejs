@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
       /* ── Hero ────────────────────────────── */
@@ -51,6 +52,38 @@
       .scroll_dot_label { position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%); font-size: 0.7rem; font-weight: 500; color: var(--text_color); white-space: nowrap; opacity: 0; transition: opacity 0.2s ease; letter-spacing: 0.05em; text-transform: uppercase; }
       .scroll_dot:hover .scroll_dot_label { opacity: 1; }
       .scroll_dot.active .scroll_dot_label { opacity: 1; color: var(--primary_color); }
+      section { scroll-margin-top: 65px; }
+
+      /* ── Experience ──────────────────────── */
+      .experience { padding: 4rem 0; border-top: 1px solid #e8e8e4; }
+      .experience_inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+      .timeline { margin-top: 2rem; }
+      .timeline_item { display: grid; grid-template-columns: 160px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid #e8e8e4; }
+      .timeline_item:last-child { border-bottom: none; }
+      .timeline_meta { display: flex; align-items: flex-start; gap: 0.5rem; padding-top: 0.2rem; }
+
+      /* ── Work Experience ──────────────────────── */
+      .experience { padding: 4rem 0; border-top: 1px solid #e8e8e4; }
+      .experience_inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 80px 1fr; gap: 0 2rem; }
+      .experience_header { grid-column: 1 / -1; margin-bottom: 1rem; }
+
+      /* Left column: the continuous dashed line + dots */
+      .timeline_spine { display: flex; flex-direction: column; align-items: center; padding-top: 0.4rem; }
+      .timeline_spine_dot { width: 10px; height: 10px; background: var(--primary_color); border-radius: 50%; flex-shrink: 0; }
+      .timeline_spine_label { font-size: 0.72rem; color: #6b6b6b; white-space: nowrap; margin-bottom: 0.4rem; }
+      .timeline_spine_trail { flex: 1; border-left: 2px dashed #d0d0d0; }
+
+      /* Right column: cards */
+      .timeline_card { border: 1px solid #6b6b6b; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; transition: transform 0.2s ease; }
+      .timeline_card:hover { box-shadow: 0 4px 20px rgba(0,82,255,0.08); transform: translateY(-2px); }
+      .timeline_card_date { font-size: 0.78rem; color: #6b6b6b; margin-bottom: 0.5rem; }
+      .timeline_role { font-size: 1.15rem; font-weight: 600; color: var(--text_color); margin-bottom: 0.15rem; }
+      .timeline_company { display: inline-flex; align-items: center; gap: 0.4em; font-size: 0.88rem; text-decoration: none; color: var(--primary_color); font-weight: 500; margin-bottom: 1rem; cursor: pointer; }
+      .timeline_list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+      .timeline_list li { font-size: 0.88rem; color: #6b6b6b; padding-left: 1.25rem; position: relative; line-height: 1.5; }
+      .timeline_list li::before { content: '—'; position: absolute; left: 0; color: var(--primary_color); font-weight: 700; }
+      .timeline_tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .timeline_tags span { font-size: 0.72rem; padding: 0.25rem 0.75rem; background: rgba(0,82,255,0.07); color: var(--primary_color); border-radius: 100px; font-weight: 500; }
     </style>
   </head>
 
@@ -141,7 +174,7 @@
             </ul>
 
             <!-- Right: stats -->
-            <div class="about_stats">
+            <div class="about_stats ">
               <div class="stat">
                 <span class="stat_num">2+</span>
                 <span class="stat_label">Years experience</span>
@@ -156,6 +189,76 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="experience ">
+      <div class="experience_inner">
+
+        <!-- Header spans full width -->
+        <div class="experience_header">
+          <span class="section_label">Experience</span>
+          <h2 class="section_title">Work history</h2>
+        </div>
+
+        <!-- Left: spine with dot + dashed trail -->
+        <div class="timeline_spine">
+          <span class="timeline_spine_label">Now</span>
+          <div class="timeline_spine_dot"></div>
+          <div class="timeline_spine_trail"></div>
+          <span class="timeline_spine_label">2024</span>
+          <div class="timeline_spine_dot"></div>
+          <div class="timeline_spine_trail"></div>
+          <span class="timeline_spine_label">2023</span>
+        </div>
+
+        <!-- Right: stacked cards -->
+        <div class="timeline_cards">
+
+          <div class="timeline_card ">
+            <p class="timeline_card_date">2024 — Present</p>
+            <h3 class="timeline_role">Full Stack Software Engineer</h3>
+            <a class="timeline_company" href="https://info.microkeeper.com.au/" target="_blank">
+              Microkeeper SAAS
+              <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75em;"></i>
+            </a>
+            <ul class="timeline_list">
+              <li>Reckon and Xero Accounting Suite API Integrations</li>
+              <li>Facilitated profile image uploads, updates, deletions, and storage for thousands of users using the Cloudflare Images API</li>
+              <li>Optimised query performance resulting in <b>10x+ faster load times</b></li>
+              <li>Built an independently configurable interactive analytics dashboard with real-time data visualisation</li>
+              <li>Delivered UI & UX improvements across multiple modules, improving usability and user flow</li>
+            </ul>
+            <div class="timeline_tags">
+              <span>PHP</span>
+              <span>JavaScript</span>
+              <span>MySQL</span>
+            </div>
+          </div>
+
+          <div class="timeline_card ">
+            <p class="timeline_card_date">2023 — 2024</p>
+            <h3 class="timeline_role">Web Developer — Contract</h3>
+            <a class="timeline_company" href="https://knightgroup.co.nz/" target="_blank">
+              Knight Group Furniture
+              <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75em;"></i>
+            </a>
+            <ul class="timeline_list">
+              <li>Worked on creating the frontend for an administration file storage system</li>
+              <li>Built the registration system with Google Maps API integration for location-based business signups</li>
+              <li>Frontend UI & UX improvements using React MUI library</li>
+            </ul>
+            <div class="timeline_tags">
+              <span>C#</span>
+              <span>Blazor .NET</span>
+              <span>Tailwind</span>
+              <span>JavaScript</span>
+              <span>React MUI</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
