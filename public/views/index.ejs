@@ -24,15 +24,17 @@
       @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(0.9); } 50% { opacity: 0.5; transform: scale(0.8); } }
       @keyframes morph { 0% { border-radius: 65% 35% 55% 45% / 50% 65% 35% 50%; } 33% { border-radius: 45% 55% 35% 65% / 60% 40% 65% 35%; } 66% { border-radius: 35% 65% 60% 40% / 45% 55% 40% 60%; } 100% { border-radius: 65% 35% 55% 45% / 50% 65% 35% 50%; } }
       @keyframes rainbow { 0% { background-position: 0 0; } 50% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+      @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 33% { transform: translateY(-6px) rotate(-1.5deg); } 66% { transform: translateY(-3px) rotate(1deg); } }
 
       /* ── About ───────────────────────────── */
       .about { padding: 3rem 0; background: #f9f9f7; border-top: 1px solid #e8e8e4; }
-      .about_inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+      .about_inner {gap: 4rem; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+      .about_grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; }
       .about_body { font-size: 1.05rem; color: #6b6b6b; line-height: 1.7; margin-bottom: 2rem; }
       .about_list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.85rem; }
-      .about_list li { font-size: 0.88rem; color: #6b6b6b; background-color: #e8e8e4; padding: 0.5rem 1rem; line-height: 1.4; border-left: 2px solid var(--primary_color); display: flex; flex-direction: column; gap: 0.1rem; }
+      .about_list li { font-size: 0.88rem; color: #6b6b6b;  padding: 0.5rem 1rem; line-height: 1.4; border-left: 2px solid var(--primary_color); display: flex; flex-direction: column; gap: 0.1rem; }
       .about_list_title { font-size: 0.82rem; font-weight: 600; color: var(--text_color); text-transform: uppercase; letter-spacing: 0.05em; }
-      .about_stats { display: flex; flex-direction: column; gap: 2.5rem; align-items: center; justify-content: center; min-height: 380px; padding: 2rem; background: rgba(0,82,255,0.03); border: 1px solid #e8e8e4; border-radius: 16px; }
+      .about_stats { display: flex; flex-direction: column; gap: 2.5rem; align-items: center; justify-content: center; padding: 2.5rem; background: #0052ff08; border: 1px solid #e8e8e4; border-radius: 16px; }
       .stat { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; text-align: center; }
       .stat_num { display: inline-block; position: relative; font-size: 2.5rem; color: var(--primary_color); line-height: 1; animation: float 3s ease-in-out infinite; }
       .stat:nth-child(2) .stat_num { animation-duration: 3.5s; animation-delay: 0.3s; }
@@ -114,46 +116,47 @@
             clean, scalable solutions. 
           </p>
 
-          <ul class="about_list">
-            <li>
-              <span class="about_list_title">API Integrations</span>
-              Connected third-party services into production systems
-            </li>
-            <li>
-              <span class="about_list_title">File Storage</span>
-              Configured profile image storage for thousands of users using Cloudflare Images API
-            </li>
-            <li>
-              <span class="about_list_title">Performance</span>
-              Optimised existing queries to deliver 10x faster load times
-            </li>
-            <li>
-              <span class="about_list_title">Dashboards</span>
-              Built interactive analytics with real-time data
-            </li>
-            <li>
-              <span class="about_list_title">UI & UX</span>
-              Improved interfaces that measurably lifted engagement & userflow
-            </li>
-          </ul>
-        </div>
+          <div class="about_grid">
+            <ul class="about_list">
+              <li>
+                <span class="about_list_title">API Integrations</span>
+                Connected third-party services into production systems
+              </li>
+              <li>
+                <span class="about_list_title">File Storage</span>
+                Configured profile image storage for thousands of users using Cloudflare Images API
+              </li>
+              <li>
+                <span class="about_list_title">Performance</span>
+                Optimised existing queries to deliver 10x faster load times
+              </li>
+              <li>
+                <span class="about_list_title">Dashboards</span>
+                Built interactive analytics with real-time data
+              </li>
+              <li>
+                <span class="about_list_title">UI & UX</span>
+                Improved interfaces that measurably lifted engagement & userflow
+              </li>
+            </ul>
 
-        <!-- Right: stats -->
-        <div class="about_stats">
-          <div class="stat">
-            <span class="stat_num">2+</span>
-            <span class="stat_label">Years experience</span>
-          </div>
-          <div class="stat">
-            <span class="stat_num">10+</span>
-            <span class="stat_label">Projects shipped</span>
-          </div>
-          <div class="stat">
-            <span class="stat_num">∞</span>
-            <span class="stat_label">Things to learn</span>
+            <!-- Right: stats -->
+            <div class="about_stats">
+              <div class="stat">
+                <span class="stat_num">2+</span>
+                <span class="stat_label">Years experience</span>
+              </div>
+              <div class="stat">
+                <span class="stat_num">25+</span>
+                <span class="stat_label">Projects shipped</span>
+              </div>
+              <div class="stat">
+                <span class="stat_num">∞</span>
+                <span class="stat_label">Things to learn</span>
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
     </section>
     
