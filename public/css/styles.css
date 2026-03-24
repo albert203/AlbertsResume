@@ -25,3 +25,116 @@ body {
 h1, h2, h3 {
   font-family: 'DM Serif Display', Georgia, serif;
 }
+
+/* Paste these into styles.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables */
+:root {
+  --primary_color: #0052ff;
+  --secondary_color: #5e72c3;
+  --tertiary_color: #bf3003;
+  --text_color: #1a1c1e;
+  --header_height: 64px;
+  --font_display: 'DM Serif Display', Georgia, serif;
+  --font_body: 'DM Sans', sans-serif;
+}
+
+/* Base */
+body {
+  font-family: var(--font_body);
+  color: var(--text_color);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font_display);
+}
+
+/* Reusable */
+.section_label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary_color);
+  margin-bottom: 0.75rem;
+}
+
+.section_title {
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  line-height: 1.2;
+  color: var(--text_color);
+  margin-bottom: 1.5rem;
+}
+
+.section_title em {
+  font-style: italic;
+  color: var(--primary_color);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.22s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn_primary {
+  background: var(--primary_color);
+  color: #fff;
+}
+
+.btn_primary:hover {
+  background: #003dcc;
+  transform: translateY(1px);
+}
+
+.btn_ghost {
+  background: transparent;
+  color: var(--text_color);
+  border: 1.5px solid #3b558e;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.btn_ghost::before {
+  content: '';
+  position: absolute;
+  bottom: -150%;
+  left: -10%;
+  width: 120%;
+  height: 200%;
+  background: var(--primary_color);
+  border-radius: 40% 40% 0 0; /* wave shape on top edge */
+  transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+  animation: wave 2s ease-in-out infinite paused; /* paused until hover */
+}
+
+@keyframes wave {
+  0%, 100% { border-radius: 40% 60% 0 0; }
+  50%      { border-radius: 60% 40% 0 0; }
+}
+
+/* On hover — water rises + wave plays */
+.btn_ghost:hover::before {
+  bottom: -30%; /* rises up to fill the button */
+  animation-play-state: running;
+}
+
+.btn_ghost:hover {
+  color: #fff;
+  border-color: var(--primary_color);
+}
