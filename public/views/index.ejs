@@ -5,21 +5,193 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../css/styles.css" />
+
+    <style>
+      /* Hero */
+      .hero {
+        min-height: calc(100vh - var(--header_height)); /* full height minus navbar */
+        display: flex;
+        align-items: center;
+      }
+
+      .hero_inner {
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+      }
+
+      .hero_content {
+        flex: 1; 
+      }
+
+      /* Available tag */
+      .hero_tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--primary_color);
+        background: rgba(0, 82, 255, 0.07);
+        padding: 0.35rem 0.85rem;
+        border-radius: 100px;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Green pulsing dot */
+      .hero_tag::before {
+        content: '';
+        width: 7px;
+        height: 7px;
+        background: #22c55e;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50%       { opacity: 0.5; transform: scale(0.8); }
+      }
+
+      /* Heading */
+      .hero_title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        line-height: 1.1;
+        color: var(--text_color);
+        margin-bottom: 1.5rem;
+      }
+
+      .hero_name{
+        color: var(--primary_color);
+      }
+
+      .hero_title em {
+        font-style: italic;
+        color: var(--primary_color);
+      }
+
+      /* Subtitle */
+      .hero_sub {
+        font-size: 1.05rem;
+        color: #6b6b6b;
+        line-height: 1.7;
+        max-width: 480px;
+        margin-bottom: 2.5rem;
+      }
+
+      /* Buttons */
+      .hero_actions {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.22s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn_primary {
+        background: var(--primary_color);
+        color: white;
+      }
+
+      .btn_primary:hover {
+        background: #003dcc;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(0, 82, 255, 0.3);
+      }
+
+      .btn_ghost {
+        background: transparent;
+        color: var(--text_color);
+        border: 1.5px solid #e8e8e4;
+      }
+
+      .btn_ghost:hover {
+        border-color: var(--primary_color);
+        color: var(--primary_color);
+      }
+
+      /* Right side visual */
+      .hero_visual {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 380px;
+      }
+
+      .hero_blob {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: linear-gradient(135deg, rgba(0,82,255,0.12), rgba(94,114,195,0.1));
+        border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+        animation: morph 8s ease-in-out infinite;
+      }
+
+      @keyframes morph {
+        0%, 100% { border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%; }
+        50%      { border-radius: 40% 60% 45% 55% / 60% 40% 55% 45%; }
+      }
+
+      .hero_initial {
+        position: relative;
+        font-size: 10rem;
+        color: var(--primary_color);
+        opacity: 0.12;
+        line-height: 1;
+        user-select: none;
+      }
+    </style>
   </head>
+
   <body>
+
     <%- include('partials/header') %>
 
-    <main class="container">
-      <section>
-        <h2>About Me</h2>
-        <p>
-          Hi, I'm Albert. I'm a software developer with a passion for creating
-          innovative solutions to complex problems. I have experience in various
-          programming languages and frameworks, and I enjoy working on both
-          front-end and back-end development projects.
-        </p>
-      </section>
+<main>
 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero_inner">
+
+      <!-- Left: text content -->
+      <div class="hero_content">
+        <span class="hero_tag">Available for work</span>
+        <h1 class="hero_title">Hi, I'm <span class="hero_name">Albert</span> —<br/>Full Stack Developer</h1>
+        <p class="hero_sub">
+          I build clean, performant web applications from database to deployment.
+          Focused on thoughtful code and great user experiences.
+        </p>
+        <div class="hero_actions">
+          <a href="/projects" class="btn btn_primary">View My Work</a>
+          <a href="/contact" class="btn btn_ghost">Get in touch</a>
+        </div>
+      </div>
+
+      <!-- Right: visual -->
+      <div class="hero_visual">
+        <div class="hero_blob"></div>
+        <span class="hero_initial">AJ</span>
+      </div>
+
+    </div>
+  </section>
+
+</main>
       <div>
         <h2>Work Experience</h2>
         <ul>

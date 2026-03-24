@@ -1,8 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+
 :root {
+  /* color pallete */
   --primary_color: #0052ff;
   --secondary_color: #5e72c3;
   --tertiary_color: #bf3003;
   --text_color: #1a1c1e;
+
+  /* header global sizes */
+  --header_height: 60px;
 }
 
 * {
@@ -12,6 +18,10 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'DM Sans', sans-serif;
   color: var(--text_color);
+}
+
+h1, h2, h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
 }
