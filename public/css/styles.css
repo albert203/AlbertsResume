@@ -104,7 +104,7 @@ h1, h2, h3 {
 .btn_ghost {
   background: transparent;
   color: var(--text_color);
-  border: 1.5px solid #3b558e;
+  border: 1.5px solid #5e72c3;
   transition: all 0.4s ease;
   overflow: hidden;
 }
@@ -112,29 +112,9 @@ h1, h2, h3 {
 .btn_ghost::before {
   content: '';
   position: absolute;
-  bottom: -150%;
-  left: -10%;
-  width: 120%;
-  height: 200%;
-  background: var(--primary_color);
-  border-radius: 40% 40% 0 0; /* wave shape on top edge */
-  transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: -1;
-  animation: wave 2s ease-in-out infinite paused; /* paused until hover */
-}
-
-@keyframes wave {
-  0%, 100% { border-radius: 40% 60% 0 0; }
-  50%      { border-radius: 60% 40% 0 0; }
-}
-
-/* On hover — water rises + wave plays */
-.btn_ghost:hover::before {
-  bottom: -30%; /* rises up to fill the button */
-  animation-play-state: running;
 }
 
 .btn_ghost:hover {
-  color: #fff;
   border-color: var(--primary_color);
+  color: var(--primary_color);
 }
