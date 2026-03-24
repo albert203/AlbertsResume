@@ -1,0 +1,76 @@
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--primary_color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .navbar_inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar_left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .navbar_logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+
+  .navbar_link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .navbar_link:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .navbar_download {
+    color: var(--primary_color);
+    background: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .navbar_download:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+  }
+</style>
+
+<header class="navbar">
+  <div class="navbar_inner">
+    <div class="navbar_left">
+      <a href="/" class="navbar_logo">Albert J</a>
+      <nav>
+        <a href="/resume" class="navbar_link">Resume</a>
+        <a href="/projects" class="navbar_link">Projects</a>
+        <a href="/contact" class="navbar_link">Contact Me</a>
+      </nav>
+    </div>
+    <a href="/resume" class="navbar_download">Download Resume</a>
+  </div>
+</header>

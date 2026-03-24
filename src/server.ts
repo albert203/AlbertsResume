@@ -1,17 +1,18 @@
-import express from 'express'; // js runtime
-import path from 'path';
-
 import dotenv from 'dotenv';
 dotenv.config(); // loads .env file contents
+
+import express from 'express'; // js runtime
+import path from 'path';
 
 // create express instance
 const app = express();
 
 // assign the folder to serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // assign the view engine to ejs
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../public/views'));
 
 // route for home page
 app.get('/', (req, res) => {
@@ -31,6 +32,10 @@ app.get('/contact', (req, res) => {
   res.render('contact');
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
-});
+app
+  .listen(process.env.PORT, () => {
+    console.log(`Server is running: http://localhost:${process.env.PORT}`);
+  })
+  .on('error', (err) => {
+    console.error('Server error:', err);
+  });
