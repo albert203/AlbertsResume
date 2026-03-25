@@ -84,6 +84,28 @@
       .timeline_list li::before { content: '—'; position: absolute; left: 0; color: var(--primary_color); font-weight: 700; }
       .timeline_tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
       .timeline_tags span { font-size: 0.72rem; padding: 0.25rem 0.75rem; background: rgba(0,82,255,0.07); color: var(--primary_color); border-radius: 100px; font-weight: 500; }
+    
+      /* ── Projects ────────────────────────── */
+      .projects { padding: 4rem 0; border-top: 1px solid #e8e8e4; background: #f9f9f7; }
+      .projects_inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+      .projects_grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+
+      /* Card */
+      .project_card { background: #fff; border: 1px solid #e8e8e4; border-radius: 16px; overflow: hidden; }
+
+      /* Video area */
+      .project_video_wrap { position: relative; width: 100%; aspect-ratio: 16/9; background: #1a1c1e; overflow: hidden; }
+      .project_video { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .project_video_overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.2s ease; }
+      .project_video_overlay span { color: #fff; font-size: 0.85rem; font-weight: 500; background: rgba(0,82,255,0.8); padding: 0.5rem 1rem; border-radius: 100px; }
+
+      /* Card body */
+      .project_card_body { padding: 1rem; }
+      .project_card_header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+      .project_card_title { font-size: 1.1rem; font-weight: 600; color: var(--text_color); }
+      .project_card_links { display: flex; gap: 1rem; }
+      .project_link { font-size: 0.8rem; font-weight: 500; color: #6b6b6b; text-decoration: none; transition: color 0.2s ease; }
+      .project_card_desc { font-size: 0.88rem; color: #6b6b6b; line-height: 1.6; margin-bottom: 1rem; }
     </style>
   </head>
 
@@ -194,7 +216,7 @@
     </section>
 
     <!-- EXPERIENCE -->
-    <section class="experience ">
+    <section class="experience">
       <div class="experience_inner">
 
         <!-- Header spans full width -->
@@ -262,6 +284,81 @@
         </div>
       </div>
     </section>
+
+    <!-- PROJECTS -->
+    <section class="projects fade_in" id="projects">
+      <div class="projects_inner">
+
+        <span class="section_label">Work</span>
+        <h2 class="section_title">Featured projects</h2>
+
+        <div class="projects_grid">
+
+          <div class="project_card fade_in">
+            <div class="project_video_wrap">
+              <video src="../assets/videos/Dashboard_video_optimised.mp4" autoplay loop muted playsinline class="project_video"></video>
+            </div>
+            <div class="project_card_body">
+              <div class="project_card_header">
+                <h3 class="project_card_title">Analytics Dashboard</h3>
+
+              </div>
+              <p class="project_card_desc">
+                Real-time analytics dashboard with interactive charts, 
+                multi-source data integration and a fully responsive UI.
+              </p>
+              <div class="timeline_tags">
+                <span>Query Optimisation</span>
+                <span>Custom Configurations</span>
+                <span>Chart JS Library</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project_card fade_in">
+            <div class="project_video_wrap">
+              <video src="../assets/videos/Skills_video_optimised.mp4" autoplay loop muted playsinline class="project_video"></video>
+            </div>
+            <div class="project_card_body">
+              <div class="project_card_header">
+                <h3 class="project_card_title">Skills HR Management Module</h3>
+              </div>
+              <p class="project_card_desc">
+                HR can view and manage employee submitted skills and files, supports viewing and downloading of many file types.
+              </p>
+              <div class="timeline_tags">
+                <span>Skills Workflow Overhaul</span>
+                <span>UI and UX Improvements</span>
+                <span>Mobile Responsive</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project_card fade_in">
+            <div class="project_video_wrap">
+              <video src="../assets/videos/Ecommerce_video_optimised.mp4" autoplay loop muted playsinline class="project_video"> </video>
+            </div>
+            <div class="project_card_body">
+              <div class="project_card_header">
+                <h3 class="project_card_title">Self Motivated Projects</h3>
+              </div>
+              <p class="project_card_desc">
+                Clothing e-commerce site, features includes admin product edit page, shopping cart, registration, login, product search and filtering, and more to come.
+              </p>
+              <div class="timeline_tags">
+                <span>BunJS</span>
+                <span>TypeScript</span>
+                <span>JavaScript</span>
+                <span>MySQL</span>
+                <span>In Progress</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     
     </main>
     <script src="../js/script.js"></script>

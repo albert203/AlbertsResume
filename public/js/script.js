@@ -45,3 +45,18 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 }); // triggers when 40% of section is visible
 
 sections.forEach(section => observer.observe(section));
+
+
+
+// Before/After sliders
+// document.querySelectorAll('.project_card--slider').forEach(card => {
+//   const input = card.querySelector('.project_slider_input');
+//   const before = card.querySelector('.project_slider_before');
+//   const handle = card.querySelector('.project_slider_handle');
+
+//   input.addEventListener('input', () => {
+//     const val = input.value;
+//     before.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+//     handle.style.left = `${val}%`;
+//   });
+// });
