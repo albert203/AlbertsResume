@@ -14,15 +14,27 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendEmail(name:string, email:string, subject: string, message: string) {
-    const result = await transporter.sendMail({
-        from: `${process.env.SMTP_USER}`, // sender address
-        to: process.env.SMTP_USER, // to me
-        replyTo: email, // reply to the user
-        subject: `Portfolio Site: ${subject}`, // Subject line
-        text: message, // plain text body
-        html: `<h2>from: ${name}</h2><br>
-               <p>user email: ${email}</p><br>
-               <p>subject: ${subject}</p><br>
-               <p>message: ${message}</p>`, // html body
-    });
+    try {
+        const result = await transporter.sendMail({
+            from: `"Albert Jordaan" <${process.env.SMTP_USER}>`, // ✅ Added name format
+            to: process.env.SMTP_USER,
+            replyTo: email,
+            subject: `Portfolio Site: ${subject}`,
+            text: message,
+            html: `<h2>from: ${name}</h2><br>
+                   <p>user email: ${email}</p><br>
+                   <p>subject: ${subject}</p><br>
+                   <p>message: ${message}</p>`,
+        });
+        console.log('Email sent correctly:', result.messageId);
+        return result;
+    } catch (err: any) {
+        console.error('error sending email:', {
+            message: err.message,
+            code: err.code,
+            command: err.command,
+            response: err.response,
+        });
+        throw err; 
+    }
 }
