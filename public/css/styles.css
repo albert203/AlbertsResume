@@ -1,31 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
 
-:root {
-  /* color pallete */
-  --primary_color: #0052ff;
-  --secondary_color: #5e72c3;
-  --tertiary_color: #bf3003;
-  --text_color: #1a1c1e;
-
-  /* header global sizes */
-  --header_height: 60px;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text_color);
-}
-
-h1, h2, h3 {
-  font-family: 'DM Serif Display', Georgia, serif;
-}
-
 /* Paste these into styles.css */
 * {
   margin: 0;
@@ -36,7 +10,7 @@ h1, h2, h3 {
 /* Variables */
 :root {
   --primary_color: #0052ff;
-  --secondary_color: #5e72c3;
+  --secondary_color: #000;
   --tertiary_color: #bf3003;
   --text_color: #1a1c1e;
   --header_height: 65px;
@@ -55,7 +29,6 @@ h1, h2, h3 {
   font-family: var(--font_display);
 }
 
-/* Reusable */
 .section_label {
   display: block;
   font-size: 0.75rem;
@@ -104,7 +77,7 @@ h1, h2, h3 {
 .btn_ghost {
   background: transparent;
   color: var(--text_color);
-  border: 1.5px solid #5e72c3;
+  border: 1.5px solid var(--text_color);
   transition: all 0.4s ease;
   overflow: hidden;
 }

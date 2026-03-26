@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Albert Jordaan - Portfolio</title>
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
+      html{scroll-behavior: smooth;}
+
       /* ── Hero ────────────────────────────── */
       .hero { min-height: calc(100vh - var(--header_height)); display: flex; align-items: center; }
       .hero_inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
@@ -106,6 +108,16 @@
       .project_card_links { display: flex; gap: 1rem; }
       .project_link { font-size: 0.8rem; font-weight: 500; color: #6b6b6b; text-decoration: none; transition: color 0.2s ease; }
       .project_card_desc { font-size: 0.88rem; color: #6b6b6b; line-height: 1.6; margin-bottom: 1rem; }
+
+      /* ── Contact CTA ─────────────────────── */
+      .contact_cta { padding: 5rem 0; background: var(--text_color); border-top: 1px solid #e8e8e4; }
+      .contact_cta_inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+      .contact_cta .section_label { color: rgba(255,255,255,0.5); }
+      .contact_cta .section_title { color: #fff; }
+      .contact_cta .section_title em { color: var(--primary_color); }
+      .contact_cta_sub { font-size: 0.95rem; color: rgba(255,255,255,0.5); }
+      .contact_cta .btn_primary { background: #fff; color: var(--text_color); font-size: 1rem; padding: 0.9rem 2rem; }
+      .contact_cta .btn_primary:hover { background: var(--primary_color); color: #fff; box-shadow: 0 4px 20px rgba(0,82,255,0.4); }
     </style>
   </head>
 
@@ -146,7 +158,7 @@
               Focused on thoughtful code and great user experiences.
             </p>
             <div class="hero_actions">
-              <a href="/projects" class="btn btn_primary">View My Work</a>
+              <a href="#about" class="btn btn_primary">Learn About Me</a>
               <a href="/contact" class="btn btn_ghost">Get in touch</a>
             </div>
           </div>
@@ -159,7 +171,7 @@
       </section>
 
     <!-- ABOUT -->
-    <section class="about">
+    <section class="about" id="about">
       <div class="about_inner">
 
         <div class="about_text">
@@ -359,6 +371,14 @@
       </div>
     </section>
 
+    <section class="contact_cta fade_in">
+      <div class="contact_cta_inner">
+        <span class="section_label">Contact Me</span>
+        <h2 class="section_title">Let's build something <em>together.</em></h2>
+        <p class="contact_cta_sub">Available for full-time roles and freelance work. Based in Vic, Australia.</p>
+        <a href="/contact" class="btn btn_primary">Get in touch →</a>
+      </div>
+    </section>
     
     </main>
     <script src="../js/script.js"></script>

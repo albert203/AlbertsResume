@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Albert Jordaan - Resume</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+    /* ── Resume Page ────────────────────── */
+    .resume_page { min-height: calc(100vh - var(--header_height)); padding: 2rem 0; }
+    .resume_inner { max-width: 900px; margin: 0 auto; padding: 0 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+    .resume_viewer { width: 100%; height: calc(100vh - 180px); min-height: 800px; border: none; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); display: block; }
+    </style>
+  </head>
+  <body>
+
+    <%- include('partials/header') %>
+
+    <main>
+      <section class="resume_page">
+        <div class="resume_inner">
+
+          <div>
+            <h1 class="section_title">My <em>Resume</em></h1>
+            <p class="section_desc">View online below, or use the <span style="color: var(--primary_color); font-weight: 500;">Download Resume</span> button in the top right.</p>
+          </div>
+
+          <iframe src="../assets/files/Albert_Jordaan_CV.pdf" class="resume_viewer"></iframe>
+
+        </div>
+      </section>
+    </main>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>

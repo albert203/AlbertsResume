@@ -47,7 +47,6 @@ const observer = new IntersectionObserver((entries) => {
 sections.forEach(section => observer.observe(section));
 
 
-
 // Before/After sliders
 // document.querySelectorAll('.project_card--slider').forEach(card => {
 //   const input = card.querySelector('.project_slider_input');
@@ -60,3 +59,38 @@ sections.forEach(section => observer.observe(section));
 //     handle.style.left = `${val}%`;
 //   });
 // });
+
+
+const form = document.getElementById('contact_form');
+
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    const data = Object.fromEntries(new FormData(form));
+
+    try {
+      const res = await fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        document.getElementById('form_success').style.display = 'block';
+        form.reset();
+        submitBtn.textContent = 'Sent!';
+      } else {
+        submitBtn.textContent = 'Failed — try again';
+        submitBtn.disabled = false;
+      }
+    } catch (err) {
+      submitBtn.textContent = 'Failed — try again';
+      submitBtn.disabled = false;
+    }
+  });
+}
