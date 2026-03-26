@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'
+import nodemailer, { TransportOptions } from 'nodemailer'
 
 // https://nodemailer.com/
 
@@ -11,7 +11,8 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-});
+  family: 4,
+} as any);
 
 export async function sendEmail(name:string, email:string, subject: string, message: string) {
     try {
