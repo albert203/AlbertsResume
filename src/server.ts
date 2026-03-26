@@ -8,6 +8,7 @@ import { sendEmail } from './mail'; // email sending function
 
 // create express instance
 const app = express();
+app.set('trust proxy', 1);
 app.use(express.json()); // for json ajax requests
 app.use(express.urlencoded({ extended: true })); // for HTML sending
 app.use(express.static(path.join(__dirname, '../public')));
