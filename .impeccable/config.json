@@ -38,6 +38,15 @@
         ],
         "createdAt": "2026-10-30T10:29:01.928Z",
         "reason": "Claude: canon card deliberately renders the category-standard portfolio (Geist, large sentence hero) as the comparison baseline"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/landing/plate-sequence.html"
+        ],
+        "createdAt": "2026-10-30T11:59:45.154Z",
+        "reason": "Claude: section.form is padded clamp(4rem,10vw,7.5rem) var(--gutter >= 1.25rem); static detector cannot resolve clamp/var, so reports zero inset"
       }
     ]
   }

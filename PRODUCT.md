@@ -35,7 +35,7 @@ Recruiters skim on laptops and phones, often from LinkedIn or email links; first
 - CV PDF downloadable; email shown as plain text alongside the form.
 - Planned features: case studies with annotated interactive screenshots, interactive web résumé, dark/light theme, ⌘K command menu, a "now" section, an interactive architecture diagram as signature moment, a short personal About section.
 - Per-file limit of 25 MiB on Cloudflare static hosting (applies to project videos).
-- Open: whether Microkeeper employment is current. The site says "2024 — Present"; the CV says "2024 — 2026".
+- Microkeeper employment: 2024 to March 2026 (ended; confirmed by Albert). Albert is currently available for full-time roles.
 
 ## Brand Commitments
 

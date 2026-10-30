@@ -29,6 +29,5 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 - Real before/after step counts and timings per project (user to supply).
 - AI automation / AI-assisted development evidence (user to supply).
-- Microkeeper employment end date.
 - About-me content and photo.
 - Later: build the Network Diagram direction as a comparison after Motion Study (user request).

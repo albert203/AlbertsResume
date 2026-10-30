@@ -123,7 +123,6 @@ src/server.ts            Express, local development only (renders the same EJS +
 
 - Before/after numbers per case study: steps, time, or load time. The illustrative "14 steps → 1" in the sketches is not real and will not ship.
 - Evidence for AI automation and AI-assisted development (this site's own build is one candidate case study).
-- Whether the Microkeeper role is current (the site says "Present"; the CV says "2026").
 - About-me notes and an optional photo.
 - Fresh high-resolution screenshots for the annotated views.
 
