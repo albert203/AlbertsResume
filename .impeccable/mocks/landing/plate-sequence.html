@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Albert Jordaan · Full-stack developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Libre+Franklin:ital,wght@0,400;0,500;0,600;1,400&family=Red+Hat+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --form: #dfe5df; --form-deep: #d1d9d2; --rule: #9aa59f;
+    --ink: #1f2624; --ink-soft: #46514d;
+    --plate: #1b1815; --plate-lift: #26211c;
+    --trace: #f1ece0; --trace-soft: #bdb6a8;
+    --op: #a8282f; --move: #2c4f9e; --wait: #b9801a;
+    --display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+    --body: 'Libre Franklin', 'Helvetica Neue', Arial, sans-serif;
+    --measure: 'Red Hat Mono', ui-monospace, monospace;
+    --gutter: clamp(1.25rem, 4vw, 3.5rem);
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scrollbar-color: var(--rule) var(--form); }
+  body { background: var(--form); color: var(--ink); font: 400 1.0625rem/1.6 var(--body); -webkit-font-smoothing: antialiased; caret-color: var(--op); }
+  ::selection { background: var(--ink); color: var(--form); }
+  .plate ::selection { background: var(--trace); color: var(--plate); }
+  a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 1px; }
+  :focus-visible { outline: 2px solid var(--op); outline-offset: 3px; }
+  .plate :focus-visible { outline-color: var(--trace); }
+  .measure { font-family: var(--measure); font-variant-numeric: tabular-nums; }
+  .sym { width: 1.1em; height: 1.1em; flex: none; vertical-align: -.18em; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: .92; letter-spacing: -.005em; text-transform: uppercase; text-wrap: balance; }
+
+  /* nav */
+  .nav { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .9rem var(--gutter); background: color-mix(in srgb, var(--plate) 92%, transparent); backdrop-filter: blur(8px); color: var(--trace); }
+  .nav .name { font-family: var(--display); font-weight: 800; font-size: 1.35rem; text-transform: uppercase; text-decoration: none; letter-spacing: .02em; }
+  .nav ul { display: flex; gap: clamp(.9rem, 2.4vw, 2.2rem); list-style: none; padding: 0; font-size: .95rem; }
+  .nav a { display: inline-flex; gap: .45rem; align-items: center; text-decoration: none; color: var(--trace-soft); transition: color .2s; }
+  .nav a:hover, .nav a[aria-current] { color: var(--trace); }
+  .nav a[aria-current] .sym { color: var(--op); }
+
+  /* plates */
+  .plate { position: relative; background: radial-gradient(130% 100% at 72% 40%, var(--plate-lift), var(--plate) 62%); color: var(--trace); overflow: hidden; isolation: isolate; }
+  .plate::after { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .2; mix-blend-mode: overlay; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .trace { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+  .trace .before { stroke: var(--trace); stroke-width: 1.4; opacity: .3; fill: none; filter: url(#bloom); transition: opacity 2.4s var(--ease) .9s; }
+  .trace .after { stroke: var(--trace); stroke-width: 3; fill: none; stroke-linecap: round; filter: url(#bloom); }
+  .trace .after-core { stroke: #fff; stroke-width: 1.2; fill: none; stroke-linecap: round; }
+  .motion .trace path { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); }
+  .motion .trace .before { transition: stroke-dashoffset 2.2s var(--ease), opacity 2.4s var(--ease) 2.2s; }
+  .motion .trace .after, .motion .trace .after-core { transition: stroke-dashoffset 1.6s var(--ease) 1.9s; }
+  .motion .drawn .trace path { stroke-dashoffset: 0; }
+  .motion .drawn .trace .before { opacity: .16; }
+  .pin { position: absolute; display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--op); color: #fff; font: 500 .85rem var(--measure); border: 0; cursor: pointer; transform: translate(-50%, -50%); box-shadow: 0 4px 14px rgba(0,0,0,.45); }
+  .pin.after-pin { background: var(--move); }
+  .pin:hover + .note, .pin:focus-visible + .note, .note:hover { opacity: 1; transform: translateY(0); }
+  .note { position: absolute; max-width: 17rem; padding: .7rem .9rem; background: var(--trace); color: var(--plate); font-size: .9rem; line-height: 1.45; opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .35s var(--ease); pointer-events: none; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+  .note b { display: block; font-weight: 600; }
+
+  /* hero */
+  .hero { min-height: calc(100svh - 3.6rem); display: grid; align-content: end; padding: 5rem var(--gutter) clamp(2rem, 6vh, 4.5rem); }
+  .hero h1 { font-size: clamp(3.6rem, 9.5vw, 6rem); max-width: 9ch; }
+  .hero .hook { max-width: 36rem; margin: 1.4rem 0 2rem; font-size: clamp(1.05rem, 1.5vw, 1.25rem); color: var(--trace); }
+  .actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+  .btn { display: inline-flex; align-items: center; gap: .55rem; padding: .95rem 1.4rem; font: 600 .95rem var(--body); text-decoration: none; border: 1.5px solid currentColor; transition: background .2s, color .2s, transform .2s var(--ease); }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--trace); color: var(--plate); border-color: var(--trace); }
+  .btn.primary:hover { background: #fff; }
+  .btn.ghost { color: var(--trace); }
+  .btn.ghost:hover { background: rgba(241,236,224,.1); }
+  .caption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 2rem; margin-top: clamp(2.5rem, 7vh, 4rem); padding-top: .9rem; border-top: 1px solid rgba(241,236,224,.35); font-size: .9rem; color: var(--trace-soft); }
+  .caption .measure { color: var(--trace); }
+
+  /* forms (light sections) */
+  .form { padding: clamp(4rem, 10vw, 7.5rem) var(--gutter); }
+  .form h2 { font-size: clamp(2.6rem, 5.5vw, 4.2rem); margin-bottom: 1.4rem; }
+  .lede { max-width: 62ch; color: var(--ink-soft); font-size: 1.12rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: .6rem 2rem; margin-top: 2.2rem; padding: 1rem 0; border-block: 1px solid var(--rule); font-size: .95rem; }
+  .legend span { display: inline-flex; gap: .5rem; align-items: center; }
+
+  /* study plates */
+  .study { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); min-height: 88svh; }
+  .study .stage { position: relative; min-height: 26rem; }
+  .study .stage video { position: absolute; inset: 12% 8% 12% 8%; width: 84%; height: 76%; object-fit: cover; box-shadow: 0 24px 60px rgba(0,0,0,.55); filter: saturate(.85); }
+  .study .stage .print { position: absolute; width: 70%; height: auto; box-shadow: 0 24px 60px rgba(0,0,0,.55); background: #fff; }
+  .study .stage .print.back { left: 6%; top: 8%; width: 58%; transform: rotate(-1.5deg); filter: saturate(.9) brightness(.92); }
+  .study .stage .print.front { right: 5%; bottom: 7%; transform: rotate(1deg); }
+  .study .text { align-self: end; padding: clamp(2rem, 5vw, 4.5rem) var(--gutter) clamp(2rem, 6vw, 4.5rem) 0; }
+  .study h2 { font-size: clamp(2.4rem, 4.6vw, 3.8rem); margin-bottom: 1.1rem; }
+  .study p { color: var(--trace-soft); max-width: 46ch; }
+  .shift { display: grid; grid-template-columns: auto 1fr; gap: .45rem 1rem; margin: 1.6rem 0; font-size: .95rem; }
+  .shift dt { color: var(--trace-soft); }
+  .shift dd { display: flex; flex-wrap: wrap; gap: .2rem; align-items: center; color: var(--trace); }
+  .shift .count { margin-left: .5rem; }
+  .flag { font: 500 .78rem var(--measure); color: var(--wait); letter-spacing: .02em; }
+  .stack { font-size: .9rem; color: var(--trace-soft); margin-bottom: 1.4rem; }
+  .readmore { display: inline-flex; gap: .5rem; align-items: center; font-weight: 600; }
+  .study.flip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+  .study.flip .stage { order: 2; }
+  .study.flip .text { padding-left: var(--gutter); padding-right: 0; }
+
+  /* experience chart */
+  .chart { width: 100%; border-collapse: collapse; margin-top: 2rem; font-size: 1rem; }
+  .chart th { text-align: left; font: 500 .8rem var(--measure); color: var(--ink-soft); padding: .6rem 1rem .6rem 0; border-bottom: 1.5px solid var(--ink); }
+  .chart td { padding: 1.3rem 1rem 1.3rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .chart td:first-child { width: 2.2rem; color: var(--op); }
+  .chart .when { white-space: nowrap; width: 9rem; }
+  .chart .role { font-weight: 600; }
+  .chart .co { color: var(--ink-soft); }
+  .chart ul { padding-left: 1.1rem; color: var(--ink-soft); max-width: 60ch; }
+  .chart li + li { margin-top: .25rem; }
+  .chart-wrap { overflow-x: auto; }
+
+  /* about / now */
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 6vw, 6rem); background: var(--form-deep); }
+  .pair h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); }
+  .pair p { color: var(--ink-soft); max-width: 52ch; }
+  .pair p + p { margin-top: 1rem; }
+  .pending { display: block; margin-top: 1rem; }
+
+  /* contact */
+  .close { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 6rem); padding: clamp(4rem, 9vw, 7rem) var(--gutter); }
+  .close h2 { font-size: clamp(3rem, 7vw, 5.4rem); }
+  .close .direct { margin-top: 1.6rem; display: grid; gap: .5rem; color: var(--trace-soft); }
+  .close .direct a { color: var(--trace); }
+  form { display: grid; gap: 1.1rem; }
+  label { display: grid; gap: .35rem; font-size: .9rem; color: var(--trace-soft); }
+  input, textarea { font: inherit; color: var(--trace); background: transparent; border: 0; border-bottom: 1.5px solid rgba(241,236,224,.45); padding: .55rem 0; transition: border-color .2s; }
+  input:focus, textarea:focus { outline: none; border-color: var(--trace); }
+  textarea { min-height: 7.5rem; resize: vertical; }
+  .log { font-size: .9rem; color: var(--trace-soft); display: flex; gap: .5rem; align-items: center; }
+  footer { padding: 1.4rem var(--gutter); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: .85rem; color: var(--ink-soft); }
+
+  @media (max-width: 860px) {
+    .nav ul li:not(:last-child) { display: none; }
+    .study, .study.flip, .pair, .close { grid-template-columns: 1fr; }
+    .study.flip .stage { order: 0; }
+    .study .text, .study.flip .text { padding: 0 var(--gutter) 3rem; }
+    .study .stage { min-height: 22rem; }
+    .chart .when { width: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  .browser { margin: 0; background: #fff; box-shadow: 0 24px 60px rgba(0,0,0,.5); border-radius: 10px; overflow: hidden; }
+  .browser-bar { display: flex; gap: .4rem; align-items: center; padding: .55rem .8rem; background: #eceae6; }
+  .browser-bar i { width: .62rem; height: .62rem; border-radius: 50%; background: #c9c5be; }
+  .browser-bar .url { margin-left: .8rem; font: 500 .8rem system-ui, sans-serif; color: #4f4c46; background: #fff; padding: .2rem .8rem; border-radius: 1rem; }
+  .browser-view { aspect-ratio: 1425 / 880; overflow: hidden; }
+  .browser-view img { display: block; width: 100%; height: auto; will-change: transform; }
+  .stage > .browser { position: absolute; top: 9%; left: 7%; width: 86%; }
+  @media (prefers-reduced-motion: reduce) { .browser-view { overflow-y: auto; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="bloom" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2.4"/></filter>
+    <symbol id="op" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="currentColor"/></symbol>
+    <symbol id="move" viewBox="0 0 20 20"><path d="M2 10h13M10 4.5 15.5 10 10 15.5" fill="none" stroke="var(--move)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="wait" viewBox="0 0 20 20"><path d="M4 3h6a7 7 0 0 1 0 14H4z" fill="var(--wait)"/></symbol>
+    <symbol id="check" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4"/></symbol>
+  </defs>
+</svg>
+
+<nav class="nav" aria-label="Main">
+  <a class="name" href="#top">Albert Jordaan</a>
+  <ul>
+    <li><a href="#studies" aria-current="true"><svg class="sym"><use href="#op"/></svg>Studies</a></li>
+    <li><a href="#experience"><svg class="sym"><use href="#move"/></svg>Experience</a></li>
+    <li><a href="#about"><svg class="sym"><use href="#check"/></svg>About</a></li>
+    <li><a href="#contact"><svg class="sym"><use href="#wait"/></svg>Contact</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+  <section class="plate hero" data-seed="7" data-pins='[{"t":0.42,"k":"before","n":"1","title":"Manual export and re-entry","body":"Payroll totals exported, then keyed into the accounting system by hand every pay run."},{"t":0.62,"k":"after","n":"2","title":"Automated sync","body":"Payroll posts straight to Xero and Reckon through their APIs."}]'>
+    <h1>Less motion. More done.</h1>
+    <p class="hook">I'm Albert, a full-stack developer in Victoria. I find the slow, manual and clunky parts of production software and automate or simplify them.</p>
+    <div class="actions">
+      <a class="btn primary" href="../../../public/assets/files/Albert_Jordaan_CV.pdf" download>Download CV</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+    <p class="caption"><span>Plate 1 · Payroll accounting sync, Microkeeper</span><span>Faint trace: before · Bright trace: after</span></p>
+  </section>
+
+  <section class="form" id="studies">
+    <h2>Every project is a motion study</h2>
+    <p class="lede">In 1912 Frank and Lillian Gilbreth tied small lights to workers' hands and photographed the wasted motion. I do the same with software: trace what a process actually costs people, then remove the steps it never needed.</p>
+    <div class="legend" role="list" aria-label="Chart symbols">
+      <span role="listitem"><svg class="sym" style="color:var(--op)"><use href="#op"/></svg>Operation</span>
+      <span role="listitem"><svg class="sym"><use href="#move"/></svg>Hand-off</span>
+      <span role="listitem"><svg class="sym"><use href="#wait"/></svg>Waiting</span>
+      <span role="listitem"><svg class="sym"><use href="#check"/></svg>Check</span>
+    </div>
+  </section>
+
+  <section class="plate study" data-seed="3" aria-labelledby="s-signal">
+    <div class="stage">
+      <figure class="browser" data-scroll-shot><div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="url">signalseo.com.au</span></div><div class="browser-view"><img src="../../captures/signalseo/current/home-full-page.webp" width="1440" height="9235" alt="The full signalSEO homepage, from hero to sign-up" loading="lazy"></div></figure>
+    </div>
+    <div class="text">
+      <h2 id="s-signal">signalSEO: my own product</h2>
+      <p>Local business owners can't see why a rival ranks above them on Google. signalSEO compares their site with that rival, then lists this week's fixes with the copy drafted by Claude and checked before it's shown. Rankings are re-checked automatically every night.</p>
+      <dl class="shift">
+        <dt>Before</dt><dd>Owners guessing, or paying for SEO tools built for experts</dd>
+        <dt>After</dt><dd>One plain-English report, fixes for this week, nightly rank alerts</dd>
+      </dl>
+      <p class="stack">TypeScript · Node · MySQL · Claude API · Firecrawl · DataForSEO · Stripe</p>
+      <a class="readmore" href="#">Read the study <svg class="sym"><use href="#move"/></svg></a>
+    </div>
+  </section>
+
+  <section class="plate study flip" data-seed="11" aria-labelledby="s-nfe">
+    <div class="stage"><figure class="browser" data-scroll-shot><div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="url">lms.naturalfacialenhancements.com</span></div><div class="browser-view"><img src="../../captures/nfe/nfe-full-page.webp" width="1425" height="3165" alt="The full NFE training platform landing page, from hero to footer" loading="lazy"></div></figure></div>
+    <div class="text">
+      <h2 id="s-nfe">NFE training platform</h2>
+      <p>A CIDESCO-endorsed training business ran on email, shared files and spreadsheets. The platform gives every participant one record: application, payment, course progress, assessed evidence, live sign-offs and certificate.</p>
+      <dl class="shift">
+        <dt>Before</dt><dd>Email threads, file folders and spreadsheets</dd>
+        <dt>After</dt><dd>One record per participant, with the next step always shown</dd>
+      </dl>
+      <p class="stack">TypeScript · Stripe · GoCardless · Xero · live video sessions · PWA</p>
+      <a class="readmore" href="#">Read the study <svg class="sym"><use href="#move"/></svg></a>
+    </div>
+  </section>
+
+  <section class="plate study" data-seed="21" aria-labelledby="s-query">
+    <div class="stage"></div>
+    <div class="text">
+      <h2 id="s-query">10× faster queries</h2>
+      <p>Key Microkeeper modules were waiting on slow database queries. I profiled them, restructured the queries and indexes, and cut load times by more than ten times.</p>
+      <dl class="shift">
+        <dt>Before</dt><dd>Users waiting on slow module loads</dd>
+        <dt>After</dt><dd><span class="measure">10×+ faster load times</span></dd>
+      </dl>
+      <p class="stack">PHP · MySQL · query profiling</p>
+      <a class="readmore" href="#">Read the study <svg class="sym"><use href="#move"/></svg></a>
+    </div>
+  </section>
+
+  <section class="plate study flip" data-seed="33" aria-labelledby="s-images">
+    <div class="stage"></div>
+    <div class="text">
+      <h2 id="s-images">Profile images, automated</h2>
+      <p>Built the upload, update and delete pipeline for profile pictures on the Cloudflare Images API, serving thousands of users without anyone handling a file.</p>
+      <dl class="shift">
+        <dt>Before</dt><dd><svg class="sym" style="color:var(--op)"><use href="#op"/></svg><svg class="sym"><use href="#move"/></svg><svg class="sym"><use href="#wait"/></svg><svg class="sym"><use href="#check"/></svg><svg class="sym" style="color:var(--op)"><use href="#op"/></svg><span class="count measure">5 steps</span></dd>
+        <dt>After</dt><dd><svg class="sym" style="color:var(--op)"><use href="#op"/></svg><span class="count measure">1 step</span></dd>
+      </dl>
+      <p class="flag">Step counts illustrative until confirmed</p>
+      <p class="stack">PHP · JavaScript · Cloudflare Images API</p>
+      <a class="readmore" href="#">Read the study <svg class="sym"><use href="#move"/></svg></a>
+    </div>
+  </section>
+
+  <section class="plate study" data-seed="48" aria-labelledby="s-dash">
+    <div class="stage"><video src="../../../public/assets/videos/Dashboard_video_optimised.mp4" autoplay muted loop playsinline aria-label="Analytics dashboard screen recording"></video></div>
+    <div class="text">
+      <h2 id="s-dash">One dashboard, not five reports</h2>
+      <p>A configurable real-time analytics dashboard built on Chart.js and the optimised queries above, so managers see the numbers live instead of assembling them.</p>
+      <p class="stack" style="margin-top:1.4rem">PHP · JavaScript · Chart.js · MySQL</p>
+      <a class="readmore" href="#">Read the study <svg class="sym"><use href="#move"/></svg></a>
+    </div>
+  </section>
+
+  <section class="plate study flip" data-seed="64" aria-labelledby="s-skills">
+    <div class="stage"><video src="../../../public/assets/videos/Skills_video_optimised.mp4" autoplay muted loop playsinline aria-label="Skills HR module screen recording"></video></div>
+    <div class="text">
+      <h2 id="s-skills">Skills HR, overhauled</h2>
+      <p>Reworked the workflow HR uses to review employee skills and documents: viewing and downloading many file types in one place, on desktop and mobile.</p>
+      <p class="stack" style="margin-top:1.4rem">PHP · JavaScript · responsive UI</p>
+      <a class="readmore" href="#">Read the study <svg class="sym"><use href="#move"/></svg></a>
+    </div>
+  </section>
+
+  <section class="form" id="experience">
+    <h2>Where the work happened</h2>
+    <div class="chart-wrap">
+      <table class="chart">
+        <thead><tr><th scope="col" aria-label="Step type"></th><th scope="col">When</th><th scope="col">Role</th><th scope="col">What moved</th></tr></thead>
+        <tbody>
+          <tr><td><svg class="sym"><use href="#op"/></svg></td><td class="when measure">Mar 2026 – now</td><td><span class="role">Founder &amp; developer</span><br><span class="co">signalSEO, local SEO reports for AU &amp; NZ businesses</span></td>
+            <td><ul><li>Designed and built the whole product, solo</li><li>Claude-drafted fixes, checked before they're shown</li><li>Nightly automated rank checks and alerts</li><li>Stripe subscriptions in A$ and NZ$</li></ul></td></tr>
+          <tr><td><svg class="sym"><use href="#op"/></svg></td><td class="when measure">Jul 2026 – now</td><td><span class="role">Full-stack developer</span><br><span class="co">NFE training platform</span></td>
+            <td><ul><li>Participant records from application to certificate</li><li>Payments, assessments and live sign-offs</li></ul></td></tr>
+          <tr><td><svg class="sym"><use href="#op"/></svg></td><td class="when measure">2024 – Mar 2026</td><td><span class="role">Full Stack Software Engineer</span><br><span class="co">Microkeeper, payroll &amp; workforce SaaS</span></td>
+            <td><ul><li>Xero and Reckon accounting integrations</li><li>Cloudflare Images pipeline for thousands of users</li><li>Queries 10×+ faster across key modules</li><li>Real-time analytics dashboard; UI/UX across modules</li></ul></td></tr>
+          <tr><td><svg class="sym" style="color:var(--ink)"><use href="#check"/></svg></td><td class="when measure">2023 – 2024</td><td><span class="role">Web Developer, contract</span><br><span class="co">Brandsmith / Knight Group Furniture</span></td>
+            <td><ul><li>Product components, dynamic pricing and shipping</li><li>Admin file storage front end</li><li>Registration flow with Google Maps API</li></ul></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="form pair" id="about">
+    <div>
+      <h2>About</h2>
+      <p>Two years building payroll and workforce software that thousands of people rely on every pay run. Most at home where systems meet: integrations, data, and the screens people use them through.</p>
+      <p class="flag pending">Personal notes from Albert go here</p>
+    </div>
+    <div>
+      <h2>Now</h2>
+      <p>Running signalSEO, my own product, and developing the NFE training platform, both built with AI-assisted development where it genuinely saves time. On the side, an e-commerce build in Bun and TypeScript. Available for full-time roles.</p>
+    </div>
+  </section>
+
+  <section class="plate close" id="contact" data-seed="90">
+    <div>
+      <h2>Hiring a full-stack developer?</h2>
+      <div class="direct">
+        <span>Email <a href="mailto:albert.jordaan@outlook.com">albert.jordaan@outlook.com</a></span>
+        <span><a href="https://www.linkedin.com/in/albert-jordaan/">LinkedIn</a> · <a href="https://github.com/albert203/">GitHub</a></span>
+        <span>Victoria, Australia</span>
+      </div>
+    </div>
+    <form onsubmit="event.preventDefault(); this.querySelector('.log span').textContent = 'Prototype: sending is wired up in the real build.'">
+      <label>Your name<input name="name" autocomplete="name" required></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      <label>Message<textarea name="message" required></textarea></label>
+      <div class="actions"><button class="btn primary" type="submit">Send message</button></div>
+      <p class="log" aria-live="polite"><svg class="sym"><use href="#wait"/></svg><span>Ready to send</span></p>
+    </form>
+  </section>
+</main>
+<footer><span>© 2026 Albert Jordaan</span><span>Motion-study plates are generated illustrations, not photographs.</span></footer>
+
+<script>
+  // Seeded traces: a tangled "before" path that resolves into one clean "after" path per plate.
+  const NS = 'http://www.w3.org/2000/svg';
+  const rng = (seed) => () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const W = 1600, H = 900;
+
+  function tangle(r, cx, cy) {
+    let d = `M${cx - 380} ${cy + 220}`;
+    for (let i = 0; i < 16; i++) {
+      const x = cx + (r() - .5) * 560, y = cy + (r() - .5) * 420;
+      d += ` C${cx + (r() - .5) * 760} ${cy + (r() - .5) * 640} ${cx + (r() - .5) * 760} ${cy + (r() - .5) * 640} ${x} ${y}`;
+    }
+    return d;
+  }
+  const clean = (cx, cy) => `M${cx - 380} ${cy + 220} C${cx - 120} ${cy + 200} ${cx + 160} ${cy + 40} ${cx + 520} ${cy - 300}`;
+
+  const motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (motion) document.documentElement.classList.add('motion');
+
+  document.querySelectorAll('.plate[data-seed]').forEach((plate) => {
+    const r = rng(+plate.dataset.seed);
+    const host = plate.querySelector('.stage') || plate;
+    const cx = host === plate ? W * .68 : W * .5, cy = H * .5;
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'trace');
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+    svg.setAttribute('aria-hidden', 'true');
+    const paths = [['before', tangle(r, cx, cy)], ['after', clean(cx, cy)], ['after-core', clean(cx, cy)]];
+    for (const [cls, d] of paths) {
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('class', cls); p.setAttribute('d', d);
+      svg.appendChild(p);
+    }
+    host.prepend(svg);
+    svg.querySelectorAll('path').forEach((p) => p.style.setProperty('--len', Math.ceil(p.getTotalLength())));
+
+    // numbered callouts placed along the paths
+    const pins = plate.dataset.pins ? JSON.parse(plate.dataset.pins) : [];
+    pins.forEach((pin) => {
+      const path = svg.querySelector(pin.k === 'before' ? '.before' : '.after');
+      const pt = path.getPointAtLength(path.getTotalLength() * pin.t);
+      const box = svg.getBoundingClientRect(), hostBox = host.getBoundingClientRect();
+      const scale = Math.max(box.width / W, box.height / H);
+      const x = (box.width - W * scale) / 2 + pt.x * scale + (box.left - hostBox.left);
+      const y = (box.height - H * scale) / 2 + pt.y * scale + (box.top - hostBox.top);
+      const btn = document.createElement('button');
+      btn.className = 'pin' + (pin.k === 'after' ? ' after-pin' : '');
+      btn.textContent = pin.n; btn.style.left = x + 'px'; btn.style.top = y + 'px';
+      btn.setAttribute('aria-label', `Note ${pin.n}: ${pin.title}`);
+      const note = document.createElement('div');
+      note.className = 'note'; note.style.left = (x + 22) + 'px'; note.style.top = (y + 18) + 'px';
+      note.innerHTML = `<b>${pin.title}</b>${pin.body}`;
+      host.append(btn, note);
+    });
+  });
+
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('drawn'); io.unobserve(e.target); }
+  }), { threshold: .35 });
+  document.querySelectorAll('.plate[data-seed]').forEach((p) => io.observe(p));
+
+  // nav marks the section in view with its chart symbol
+  const links = [...document.querySelectorAll('.nav ul a')];
+  const spy = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    links.forEach((a) => a.toggleAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  ['studies', 'experience', 'about', 'contact'].forEach((id) => spy.observe(document.getElementById(id)));
+  // NFE screenshot scrolls inside its frame in step with the page, eased so it trails slightly like a real scroll
+  const shots = [...document.querySelectorAll('[data-scroll-shot]')];
+  if (shots.length && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const pos = new Map();
+    let running = false;
+    const target = (shot) => {
+      const view = shot.querySelector('.browser-view'), img = view.querySelector('img');
+      const r = shot.closest('section').getBoundingClientRect(), vh = innerHeight;
+      const p = Math.min(1, Math.max(0, (vh * 0.8 - r.top) / (r.height + vh * 0.6)));
+      return p * Math.max(0, img.offsetHeight - view.clientHeight);
+    };
+    const frame = () => {
+      let moving = false;
+      for (const shot of shots) {
+        const t = target(shot);
+        let c = pos.has(shot) ? pos.get(shot) : t;
+        c += (t - c) * 0.12;
+        if (Math.abs(t - c) > 0.4) moving = true; else c = t;
+        pos.set(shot, c);
+        shot.querySelector('.browser-view img').style.transform = `translateY(${-c}px)`;
+      }
+      running = moving && requestAnimationFrame(frame);
+    };
+    const kick = () => { if (!running) running = requestAnimationFrame(frame); };
+    addEventListener('scroll', kick, { passive: true });
+    addEventListener('resize', kick);
+    kick();
+  }
+</script>
+</body>
+</html>

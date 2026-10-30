@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Motion Study sketch</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap">
+<style>
+  :root { --plate:#1c1916; --trace:#f2eee4; --form:#dde4de; --ink:#22282a; --red:#b3262d; --blue:#2b4c9b; --ochre:#c98a1b; }
+  * { margin:0; box-sizing:border-box; }
+  body { width:1440px; height:900px; overflow:hidden; font-family:'Archivo',sans-serif; background:var(--plate); color:var(--trace); }
+  .plate { position:relative; height:780px; background:radial-gradient(120% 90% at 70% 45%, #2a2622 0%, var(--plate) 60%); overflow:hidden; }
+  .grain { position:absolute; inset:0; opacity:.18; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E"); mix-blend-mode:overlay; }
+  svg.traces { position:absolute; inset:0; }
+  nav { position:absolute; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:28px 56px; font-stretch:80%; font-size:15px; letter-spacing:.06em; text-transform:uppercase; }
+  nav .links { display:flex; gap:36px; align-items:center; }
+  nav .links span { display:flex; gap:10px; align-items:center; }
+  .sym { width:14px; height:14px; border:1.5px solid var(--trace); border-radius:50%; display:inline-block; }
+  .sym.sq { border-radius:0; } .sym.tri { border:none; width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:14px solid var(--trace); }
+  .copy { position:absolute; left:56px; bottom:96px; width:720px; }
+  .plateno { font-stretch:75%; font-size:14px; letter-spacing:.14em; text-transform:uppercase; opacity:.7; margin-bottom:22px; }
+  h1 { font-size:104px; line-height:.9; font-weight:760; font-stretch:72%; letter-spacing:-.01em; text-transform:uppercase; }
+  .hook { font-size:22px; line-height:1.45; max-width:560px; margin:26px 0 34px; font-weight:350; opacity:.92; }
+  .actions { display:flex; gap:16px; }
+  .btn { padding:16px 26px; font-size:16px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; font-stretch:85%; }
+  .btn.primary { background:var(--trace); color:var(--plate); }
+  .btn.ghost { border:1.5px solid var(--trace); }
+  .legend { position:absolute; right:56px; bottom:96px; width:300px; font-size:14px; line-height:1.5; border-top:1.5px solid var(--trace); padding-top:14px; }
+  .legend b { display:block; font-stretch:75%; letter-spacing:.12em; text-transform:uppercase; font-size:13px; margin-bottom:8px; }
+  .row { display:flex; justify-content:space-between; }
+  .chart { height:120px; background:var(--form); color:var(--ink); padding:22px 56px; display:grid; grid-template-columns:200px 1fr; gap:40px; }
+  .chart h2 { font-size:30px; font-stretch:72%; text-transform:uppercase; line-height:1; }
+  .steps { display:flex; gap:18px; align-items:center; font-size:14px; }
+  .step { display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .c { width:26px; height:26px; border-radius:50%; background:var(--red); } .a { width:30px; height:0; border-top:3px solid var(--blue); position:relative; top:10px; } .d { width:26px; height:26px; background:var(--ochre); border-radius:0 13px 13px 0; } .s { width:24px; height:24px; border:3px solid var(--ink); }
+</style></head><body>
+<section class="plate">
+  <div class="grain"></div>
+  <svg class="traces" viewBox="0 0 1440 780" fill="none">
+    <defs><filter id="glow"><feGaussianBlur stdDeviation="2.2"/></filter></defs>
+    <g stroke="#f2eee4" stroke-width="2" opacity=".32" filter="url(#glow)">
+      <path d="M820 520 C900 300 1180 260 1120 420 S860 600 960 360 S1300 200 1240 470 S980 640 1020 420 S1260 300 1180 540 S900 560 1000 300 S1340 330 1260 560 S1000 480 1100 330"/>
+      <path d="M860 560 C960 380 1240 420 1160 300 S900 260 1060 520 S1320 520 1200 300 S960 420 1080 600"/>
+    </g>
+    <g stroke="#f2eee4" stroke-width="3.5" stroke-linecap="round" filter="url(#glow)"><path d="M800 600 C960 560 1120 420 1360 160"/></g>
+    <g stroke="#f2eee4" stroke-width="2" stroke-linecap="round"><path d="M800 600 C960 560 1120 420 1360 160"/></g>
+    <g fill="#f2eee4" font-family="Archivo" font-size="13" letter-spacing="1.5">
+      <circle cx="1052" cy="456" r="9" fill="#b3262d"/><text x="1068" y="452">01  MANUAL EXPORT → IMPORT, 14 STEPS</text>
+      <circle cx="1238" cy="300" r="9" fill="#2b4c9b"/><text x="1022" y="290" text-anchor="start" dx="0">02  AUTOMATED SYNC, 1 STEP</text>
+    </g>
+  </svg>
+  <nav><span style="font-weight:700">Albert Jordaan</span>
+    <div class="links"><span><i class="sym"></i>Work</span><span><i class="sym sq"></i>Résumé</span><span><i class="sym tri"></i>Contact</span></div></nav>
+  <div class="copy">
+    <h1>Less motion.<br/>More done.</h1>
+    <p class="hook">Full-stack developer in Victoria. I turn slow, manual processes in production software into automatic, faster ones: Xero and Reckon sync, a Cloudflare Images pipeline, 10x faster queries.</p>
+    <div class="actions"><span class="btn primary">Download CV</span><span class="btn ghost">Get in touch</span></div>
+  </div>
+  <div class="legend"><b>Plate 01 · Payroll accounting sync</b>
+    <div class="row"><span>Faint trace</span><span>Before</span></div>
+    <div class="row"><span>Bright trace</span><span>After</span></div>
+    <div class="row"><span>Step counts</span><span>Illustrative</span></div></div>
+</section>
+<section class="chart">
+  <h2>Flow process chart</h2>
+  <div class="steps"><div class="step"><i class="c"></i>Operation</div><i class="a"></i><div class="step"><i class="d"></i>Delay</div><i class="a"></i><div class="step"><i class="s"></i>Inspect</div><i class="a"></i><div class="step"><i class="c"></i>Operation</div></div>
+</section>
+</body></html>

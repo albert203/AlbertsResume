@@ -1,386 +1,258 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Albert Jordaan - Portfolio</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Albert Jordaan · Full-stack developer</title>
+<meta name="description" content="Albert Jordaan, full-stack developer based in Australia and New Zealand. Process automation, AI-assisted development with LLMs, API integrations and data analytics, shown on real SaaS products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800;900&family=Overpass+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='%23fff' stroke='%231d1d1b' stroke-width='6'/%3E%3C/svg%3E">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3.5h3.5l1.8 4.6-2.3 1.4a11.5 11.5 0 0 0 6.5 6.5l1.4-2.3 4.6 1.8V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5.5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11.3a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.7" r="2.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4z"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.7 7 9 4-1.3 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-1.9c-3.12.68-3.78-1.5-3.78-1.5-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.68.08-.68 1.12.08 1.72 1.15 1.72 1.15 1 1.72 2.63 1.22 3.27.93.1-.72.39-1.22.71-1.5-2.49-.28-5.11-1.25-5.11-5.55 0-1.22.44-2.22 1.15-3-.11-.29-.5-1.43.11-2.98 0 0 .94-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.69.11 2.98.72.78 1.15 1.78 1.15 3 0 4.31-2.62 5.26-5.12 5.54.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8z"/></symbol>
+</svg>
 
-    <style>
-      html{scroll-behavior: smooth;}
+<nav class="nav" aria-label="Main">
+  <a class="name" href="#top">Albert Jordaan</a>
+  <ul>
+    <li><a href="#lines"><span class="bar" style="background:var(--purple)"></span>Work</a></li>
+    <li><a href="#experience"><span class="bar" style="background:var(--red)"></span>Experience</a></li>
+    <li><a href="#about"><span class="bar" style="background:var(--green)"></span>About</a></li>
+    <li><a href="#contact"><span class="bar" style="background:var(--blue)"></span>Contact</a></li>
+  </ul>
+</nav>
 
-      /* ── Hero ────────────────────────────── */
-      .hero { min-height: calc(100vh - var(--header_height)); display: flex; align-items: center; }
-      .hero_inner { display: grid; grid-template-columns: 1fr 1fr; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-      .hero_tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 500; color: var(--primary_color); background: rgba(0,82,255,0.07); padding: 0.5rem 0.85rem; border-radius: 8px; margin-bottom: 1.5rem; }
-      .hero_tag::before { content: ''; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
-      .hero_title { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; color: var(--text_color); margin-bottom: 1.5rem; }
-      .hero_name { color: var(--primary_color); }
-      .hero_sub { font-size: 1.05rem; color: #6b6b6b; line-height: 1.7; max-width: 480px; margin-bottom: 2.5rem; }
-      .hero_actions { display: flex; gap: 1rem; }
-      .hero_visual { position: relative; display: flex; align-items: center; justify-content: center; height: 380px; }
-      .hero_blob { position: absolute; width: 320px; height: 320px; border-radius: 65% 35% 55% 45% / 50% 65% 35% 50%; animation: morph 10s ease-in-out infinite; }
-      .hero_blob::before { content: ''; position: absolute; inset: -4px; background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000); background-size: 400%; border-radius: 65% 35% 55% 45% / 50% 65% 35% 50%; z-index: -1; animation: morph 8s ease-in-out infinite, rainbow 20s linear infinite; }
-
-      /* ── Animations ──────────────────────── */
-      @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(0.9); } 50% { opacity: 0.5; transform: scale(0.8); } }
-      @keyframes morph { 0% { border-radius: 65% 35% 55% 45% / 50% 65% 35% 50%; } 33% { border-radius: 45% 55% 35% 65% / 60% 40% 65% 35%; } 66% { border-radius: 35% 65% 60% 40% / 45% 55% 40% 60%; } 100% { border-radius: 65% 35% 55% 45% / 50% 65% 35% 50%; } }
-      @keyframes rainbow { 0% { background-position: 0 0; } 50% { background-position: 100% 0; } 100% { background-position: 0 0; } }
-      @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 33% { transform: translateY(-6px) rotate(-1.5deg); } 66% { transform: translateY(-3px) rotate(1deg); } }
-
-      /* ── About ───────────────────────────── */
-      .about { padding: 3rem 0; background: #f9f9f7; border-top: 1px solid #e8e8e4; }
-      .about_inner {gap: 4rem; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-      .about_grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; }
-      .about_body { font-size: 1.05rem; color: #6b6b6b; line-height: 1.7; margin-bottom: 2rem; }
-      .about_list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.85rem; }
-      .about_list li { font-size: 0.88rem; color: #6b6b6b;  padding: 0.5rem 1rem; line-height: 1.4; border-left: 2px solid var(--primary_color); display: flex; flex-direction: column; gap: 0.1rem; }
-      .about_list_title { font-size: 0.82rem; font-weight: 600; color: var(--text_color); text-transform: uppercase; letter-spacing: 0.05em; }
-      .about_stats { display: flex; flex-direction: column; gap: 2.5rem; align-items: center; justify-content: center; padding: 2.5rem; background: #0052ff08; border: 1px solid #e8e8e4; border-radius: 16px; }
-      .stat { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; text-align: center; }
-      .stat_num { display: inline-block; position: relative; font-size: 2.5rem; color: var(--primary_color); line-height: 1; animation: float 3s ease-in-out infinite; }
-      .stat:nth-child(2) .stat_num { animation-duration: 3.5s; animation-delay: 0.3s; }
-      .stat:nth-child(3) .stat_num { animation-duration: 4s; animation-delay: 0.6s; }
-      .stat_label { font-size: 0.78rem; color: #6b6b6b; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
-
-      /* ── Scroll Trail ────────────────────── */
-      .scroll_trail { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 50; display: flex; flex-direction: column; align-items: center; }
-      .scroll_trail_bar { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: #e8e8e4; border-radius: 2px; z-index: 0; }
-      .scroll_dots { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 2rem; }
-      .scroll_dot { position: relative; width: 10px; height: 10px; border-radius: 50%; background: #e8e8e4; border: 2px solid #e8e8e4; cursor: pointer; transition: all 0.3s ease; }
-      .scroll_dot.active { background: var(--primary_color); border-color: var(--primary_color); transform: scale(1.3); }
-      .scroll_dot:hover { border-color: var(--primary_color); }
-      .scroll_dot_label { position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%); font-size: 0.7rem; font-weight: 500; color: var(--text_color); white-space: nowrap; opacity: 0; transition: opacity 0.2s ease; letter-spacing: 0.05em; text-transform: uppercase; }
-      .scroll_dot:hover .scroll_dot_label { opacity: 1; }
-      .scroll_dot.active .scroll_dot_label { opacity: 1; color: var(--primary_color); }
-      section { scroll-margin-top: 65px; }
-
-      /* ── Experience ──────────────────────── */
-      .experience { padding: 4rem 0; border-top: 1px solid #e8e8e4; }
-      .experience_inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-      .timeline { margin-top: 2rem; }
-      .timeline_item { display: grid; grid-template-columns: 160px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid #e8e8e4; }
-      .timeline_item:last-child { border-bottom: none; }
-      .timeline_meta { display: flex; align-items: flex-start; gap: 0.5rem; padding-top: 0.2rem; }
-
-      /* ── Work Experience ──────────────────────── */
-      .experience { padding: 4rem 0; border-top: 1px solid #e8e8e4; }
-      .experience_inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 80px 1fr; gap: 0 2rem; }
-      .experience_header { grid-column: 1 / -1; margin-bottom: 1rem; }
-
-      /* Left column: the continuous dashed line + dots */
-      .timeline_spine { display: flex; flex-direction: column; align-items: center; padding-top: 0.4rem; }
-      .timeline_spine_dot { width: 10px; height: 10px; background: var(--primary_color); border-radius: 50%; flex-shrink: 0; }
-      .timeline_spine_label { font-size: 0.72rem; color: #6b6b6b; white-space: nowrap; margin-bottom: 0.4rem; }
-      .timeline_spine_trail { flex: 1; border-left: 2px dashed #d0d0d0; }
-
-      /* Right column: cards */
-      .timeline_card { border: 1px solid #6b6b6b; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; transition: transform 0.2s ease; }
-      .timeline_card:hover { box-shadow: 0 4px 20px rgba(0,82,255,0.08); transform: translateY(-2px); }
-      .timeline_card_date { font-size: 0.78rem; color: #6b6b6b; margin-bottom: 0.5rem; }
-      .timeline_role { font-size: 1.15rem; font-weight: 600; color: var(--text_color); margin-bottom: 0.15rem; }
-      .timeline_company { display: inline-flex; align-items: center; gap: 0.4em; font-size: 0.88rem; text-decoration: none; color: var(--primary_color); font-weight: 500; margin-bottom: 1rem; cursor: pointer; }
-      .timeline_list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
-      .timeline_list li { font-size: 0.88rem; color: #6b6b6b; padding-left: 1.25rem; position: relative; line-height: 1.5; }
-      .timeline_list li::before { content: '—'; position: absolute; left: 0; color: var(--primary_color); font-weight: 700; }
-      .timeline_tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-      .timeline_tags span { font-size: 0.72rem; padding: 0.25rem 0.75rem; background: rgba(0,82,255,0.07); color: var(--primary_color); border-radius: 100px; font-weight: 500; }
-    
-      /* ── Projects ────────────────────────── */
-      .projects { padding: 4rem 0; border-top: 1px solid #e8e8e4; background: #f9f9f7; }
-      .projects_inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-      .projects_grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-
-      /* Card */
-      .project_card { background: #fff; border: 1px solid #e8e8e4; border-radius: 16px; overflow: hidden; }
-
-      /* Video area */
-      .project_video_wrap { position: relative; width: 100%; aspect-ratio: 16/9; background: #1a1c1e; overflow: hidden; }
-      .project_video { width: 100%; height: 100%; object-fit: cover; display: block; }
-      .project_video_overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.2s ease; }
-      .project_video_overlay span { color: #fff; font-size: 0.85rem; font-weight: 500; background: rgba(0,82,255,0.8); padding: 0.5rem 1rem; border-radius: 100px; }
-
-      /* Card body */
-      .project_card_body { padding: 1rem; }
-      .project_card_header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
-      .project_card_title { font-size: 1.1rem; font-weight: 600; color: var(--text_color); }
-      .project_card_links { display: flex; gap: 1rem; }
-      .project_link { font-size: 0.8rem; font-weight: 500; color: #6b6b6b; text-decoration: none; transition: color 0.2s ease; }
-      .project_card_desc { font-size: 0.88rem; color: #6b6b6b; line-height: 1.6; margin-bottom: 1rem; }
-
-      /* ── Contact CTA ─────────────────────── */
-      .contact_cta { padding: 5rem 0; background: var(--text_color); border-top: 1px solid #e8e8e4; }
-      .contact_cta_inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
-      .contact_cta .section_label { color: rgba(255,255,255,0.5); }
-      .contact_cta .section_title { color: #fff; }
-      .contact_cta .section_title em { color: var(--primary_color); }
-      .contact_cta_sub { font-size: 0.95rem; color: rgba(255,255,255,0.5); }
-      .contact_cta .btn_primary { background: #fff; color: var(--text_color); font-size: 1rem; padding: 0.9rem 2rem; }
-      .contact_cta .btn_primary:hover { background: var(--primary_color); color: #fff; box-shadow: 0 4px 20px rgba(0,82,255,0.4); }
-    </style>
-  </head>
-
-  <body>
-
-    <%- include('partials/header') %>
-
-    <!-- Scroll progress trail -->
-    <div class="scroll_trail">
-      <div class="scroll_trail_bar"></div>
-      <div class="scroll_dots">
-        <div class="scroll_dot active" data-section="hero">
-          <span class="scroll_dot_label">Home</span>
-        </div>
-        <div class="scroll_dot" data-section="about">
-          <span class="scroll_dot_label">About</span>
-        </div>
-        <div class="scroll_dot" data-section="experience">
-          <span class="scroll_dot_label">Experience</span>
-        </div>
-        <div class="scroll_dot" data-section="projects">
-          <span class="scroll_dot_label">Projects</span>
-        </div>
+<main id="top">
+  <section class="intro-band" aria-labelledby="hero-title">
+    <div>
+      <h1 id="hero-title">Systems that run themselves.</h1>
+      <p>I'm Albert, a full-stack developer based in Australia and often in New Zealand. I look for the slow, manual parts of a business and build software that does them instead: process automation, LLM features, API integrations and data tools.</p>
+      <div class="actions">
+        <a class="btn primary" href="/assets/files/Albert_Jordaan_CV.pdf" download>Download CV</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
       </div>
     </div>
+    <div class="key" aria-label="Map key">
+      <p>Each coloured area is a project and each line is something I built, coloured by the kind of work. Hover a stop to see what it does.</p>
+      <div class="row"><span><span class="bar" style="background:var(--purple)"></span>LLM &amp; AI features</span><span><span class="bar" style="background:var(--teal)"></span>Process automation</span><span><span class="bar" style="background:var(--rose)"></span>Testing &amp; workflow tools</span><span><span class="bar" style="background:var(--blue)"></span>API integrations</span><span><span class="bar" style="background:var(--red)"></span>Data &amp; performance</span><span><span class="bar" style="background:var(--green)"></span>Media pipelines</span><span><span class="bar" style="background:var(--amber)"></span>UI/UX</span></div>
+    </div>
+  </section>
 
-    <main>
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero_inner">
+  <div class="map-wrap">
+    <svg class="map" viewBox="0 0 1440 950" role="group" aria-label="System map of the projects Albert has built: Microkeeper, signalSEO and NFE"></svg>
+    <div class="tip" role="status" aria-live="polite"></div>
+  </div>
 
-          <!-- Left: text content -->
-          <div class="hero_content">
-            <span class="hero_tag">Available for work</span>
-            <h1 class="hero_title">Hi, I'm <span class="hero_name">Albert</span> —<br/>Full Stack Developer</h1>
-            <p class="hero_sub">
-              I build clean, performant web applications from database to deployment.
-              Focused on thoughtful code and great user experiences.
-            </p>
-            <div class="hero_actions">
-              <a href="#about" class="btn btn_primary">Learn About Me</a>
-              <a href="/contact" class="btn btn_ghost">Get in touch</a>
-            </div>
-          </div>
+  <section class="intro" id="lines">
+    <h2>Work projects</h2>
+    <p>Three projects, newest first. signalSEO is my own product. At NFE I test and improve a live training platform on contract. At Microkeeper I spent two years on payroll software used by businesses across Australia.</p>
+    <p>Each one shows what the software does, what I built and what it runs on. The recordings play when you reach them. Hover one to pause it, or pick a tab to skip ahead.</p>
+  </section>
 
-          <!-- Right: visual -->
-          <div class="hero_visual">
-            <div class="hero_blob"></div>
-          </div>
-        </div>
-      </section>
-
-    <!-- ABOUT -->
-    <section class="about" id="about">
-      <div class="about_inner">
-
-        <div class="about_text">
-          <span class="section_label">About me</span>
-          <h2 class="section_title">Turning ideas into <em>reality</em></h2>
-
-          <p class="about_body">
-            Full stack engineer with 2+ years turning complex problems into
-            clean, scalable solutions. 
-          </p>
-
-          <div class="about_grid">
-            <ul class="about_list">
-              <li>
-                <span class="about_list_title">API Integrations</span>
-                Connected third-party services into production systems
-              </li>
-              <li>
-                <span class="about_list_title">File Storage</span>
-                Configured profile image storage for thousands of users using Cloudflare Images API
-              </li>
-              <li>
-                <span class="about_list_title">Performance</span>
-                Optimised existing queries to deliver 10x faster load times
-              </li>
-              <li>
-                <span class="about_list_title">Dashboards</span>
-                Built interactive analytics with real-time data
-              </li>
-              <li>
-                <span class="about_list_title">UI & UX</span>
-                Improved interfaces that measurably lifted engagement & userflow
-              </li>
-            </ul>
-
-            <!-- Right: stats -->
-            <div class="about_stats ">
-              <div class="stat">
-                <span class="stat_num">2+</span>
-                <span class="stat_label">Years experience</span>
-              </div>
-              <div class="stat">
-                <span class="stat_num">25+</span>
-                <span class="stat_label">Projects shipped</span>
-              </div>
-              <div class="stat">
-                <span class="stat_num">∞</span>
-                <span class="stat_label">Things to learn</span>
-              </div>
-            </div>
-          </div>
-        </div>
+  <section class="route" style="--line:var(--purple)" aria-labelledby="r-signal">
+    <div class="zone">
+      <div class="badge"><b>signalSEO</b><span>2026 – now&ensp;·&ensp;Founder</span></div>
+      <div class="notes">
+          <h3 id="r-signal">My own product</h3>
+          <p class="lede">SEO and business-positioning software that shows local businesses where they stand, what they're doing wrong and how to fix it, then keeps watch, so they rank better without the guesswork and get back to running their business.</p>
+          <ol class="stops">
+            <li><strong>Understand</strong><span>A plain-English report on where they rank, who's beating them, and why.</span></li>
+            <li><strong>Monitor</strong><span>Rankings checked every night, plus rival moves and what Google's AI answer says.</span></li>
+            <li><strong>Control</strong><span>A short list of fixes for the week, drafted by Claude and checked before anyone sees it.</span></li>
+            <li><strong>Built on my own</strong><span>LLM integration, data pipelines from Firecrawl, DataForSEO and Google, and Stripe billing, with over 100 automated test files.</span></li>
+          </ol>
+          <ul class="status" aria-label="Stack"><li>TypeScript</li><li>Node</li><li>Express</li><li>PostgreSQL</li><li>Claude API</li><li>Firecrawl</li><li>DataForSEO</li><li>Stripe</li></ul>
       </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section class="experience">
-      <div class="experience_inner">
-
-        <!-- Header spans full width -->
-        <div class="experience_header">
-          <span class="section_label">Experience</span>
-          <h2 class="section_title">Work history</h2>
+      <figure class="viewer tabs" data-viewer style="--line:var(--purple);--ar:16/10" aria-label="signalSEO">
+        <div class="screen">
+          <div class="slide on"><div class="shot"><video data-chapters src="/assets/videos/signal-ride.mp4" poster="/assets/videos/signal-ride-poster.webp" muted playsinline preload="metadata" aria-label="signalSEO site: the rival check, then each section in turn"></video></div></div>
         </div>
-
-        <!-- Left: spine with dot + dashed trail -->
-        <div class="timeline_spine">
-          <span class="timeline_spine_label">Now</span>
-          <div class="timeline_spine_dot"></div>
-          <div class="timeline_spine_trail"></div>
-          <span class="timeline_spine_label">2024</span>
-          <div class="timeline_spine_dot"></div>
-          <div class="timeline_spine_trail"></div>
-          <span class="timeline_spine_label">2023</span>
+        <div class="track">
+          <button class="play" type="button" aria-label="Pause"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="i-pause" d="M6 4h3v12H6zM11 4h3v12h-3z"/><path class="i-play" d="M6 4l10 6-10 6z"/></svg></button>
+          <ol class="stations" aria-label="Chapters">
+            <li><button type="button" data-t="0" data-note="Paste a website and see who outranks it, built from scraped pages and live Google data.">Rival check</button></li>
+            <li><button type="button" data-t="4.03" data-note="Owners get one clear answer instead of hundreds of keywords.">One answer</button></li>
+            <li><button type="button" data-t="11.14" data-note="Claude drafts the wording for each fix, and automated checks run before it's shown.">Report &amp; fixes</button></li>
+            <li><button type="button" data-t="17.4" data-note="Every night it reads Google's AI answer and flags whether it cites you or a rival.">AI answers</button></li>
+            <li><button type="button" data-t="23.98" data-note="Every number says where it came from: measured, estimated or written by AI.">Sources</button></li>
+          </ol>
+          <span class="rail" aria-hidden="true"><span class="fill"></span></span>
         </div>
+        <figcaption class="caption" aria-live="polite"></figcaption>
+      </figure>
+    </div>
+  </section>
 
-        <!-- Right: stacked cards -->
-        <div class="timeline_cards">
-
-          <div class="timeline_card ">
-            <p class="timeline_card_date">2024 — March 2026</p>
-            <h3 class="timeline_role">Full Stack Software Engineer</h3>
-            <a class="timeline_company" href="https://info.microkeeper.com.au/" target="_blank">
-              Microkeeper SAAS
-              <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75em;"></i>
-            </a>
-            <ul class="timeline_list">
-              <li>Reckon and Xero Accounting Suite API Integrations</li>
-              <li>Facilitated profile image uploads, updates, deletions, and storage for thousands of users using the Cloudflare Images API</li>
-              <li>Optimised query performance resulting in <b>10x+ faster load times</b></li>
-              <li>Built an independently configurable interactive analytics dashboard with real-time data visualisation</li>
-              <li>Delivered UI & UX improvements across multiple modules, improving usability and user flow</li>
-            </ul>
-            <div class="timeline_tags">
-              <span>PHP</span>
-              <span>JavaScript</span>
-              <span>MySQL</span>
-            </div>
-          </div>
-
-          <div class="timeline_card ">
-            <p class="timeline_card_date">2023 — 2024</p>
-            <h3 class="timeline_role">Web Developer — Contract</h3>
-            <a class="timeline_company" href="https://knightgroup.co.nz/" target="_blank">
-              Knight Group Furniture
-              <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75em;"></i>
-            </a>
-            <ul class="timeline_list">
-              <li>Worked on creating the frontend for an administration file storage system</li>
-              <li>Built the registration system with Google Maps API integration for location-based business signups</li>
-              <li>Frontend UI & UX improvements using React MUI library</li>
-            </ul>
-            <div class="timeline_tags">
-              <span>C#</span>
-              <span>Blazor .NET</span>
-              <span>Tailwind</span>
-              <span>JavaScript</span>
-              <span>React MUI</span>
-            </div>
-          </div>
-
-        </div>
+  <section class="route flip" style="--line:var(--rose)" aria-labelledby="r-nfe">
+    <div class="zone">
+      <div class="badge"><b>NFE</b><span>Oct 2026 – now&ensp;·&ensp;Contract</span></div>
+      <div class="notes">
+          <h3 id="r-nfe">Testing and improving a live platform</h3>
+          <p class="lede">A training platform that takes beauty therapists from application to certificate. I test it, fix what I find, and ship approved changes for participants, tutors and admins using Claude Code.</p>
+          <ol class="stops">
+            <li><strong>60 acceptance tests</strong><span>Then automated the click-through checks with AI agents and Playwright.</span></li>
+            <li><strong>Public site rework</strong><span>The homepage, training, register and sign-in pages, to an approved design.</span></li>
+            <li><strong>One design system</strong><span>Labels, icons and tables that look the same for every role.</span></li>
+            <li><strong>Support desk</strong><span>Staff can fix sign-in problems, and every action is logged.</span></li>
+          </ol>
+          <ul class="status" aria-label="Stack"><li>TypeScript</li><li>Claude Code</li><li>Playwright</li><li>Clerk</li><li>Replit</li></ul>
       </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section class="projects fade_in" id="projects">
-      <div class="projects_inner">
-
-        <span class="section_label">Work</span>
-        <h2 class="section_title">Featured projects</h2>
-
-        <div class="projects_grid">
-
-          <div class="project_card fade_in">
-            <div class="project_video_wrap">
-              <video src="/assets/videos/Dashboard_video_optimised.mp4" autoplay loop muted playsinline class="project_video"></video>
-            </div>
-            <div class="project_card_body">
-              <div class="project_card_header">
-                <h3 class="project_card_title">Analytics Dashboard</h3>
-
-              </div>
-              <p class="project_card_desc">
-                Real-time analytics dashboard with interactive charts, 
-                multi-source data integration and a fully responsive UI.
-              </p>
-              <div class="timeline_tags">
-                <span>Query Optimisation</span>
-                <span>Custom Configurations</span>
-                <span>Chart JS Library</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="project_card fade_in">
-            <div class="project_video_wrap">
-              <video src="/assets/videos/Skills_video_optimised.mp4" autoplay loop muted playsinline class="project_video"></video>
-            </div>
-            <div class="project_card_body">
-              <div class="project_card_header">
-                <h3 class="project_card_title">Skills HR Management Module</h3>
-              </div>
-              <p class="project_card_desc">
-                HR can view and manage employee submitted skills and files, supports viewing and downloading of many file types.
-              </p>
-              <div class="timeline_tags">
-                <span>Skills Workflow Overhaul</span>
-                <span>UI and UX Improvements</span>
-                <span>Mobile Responsive</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="project_card fade_in">
-            <div class="project_video_wrap">
-              <video src="/assets/videos/Ecommerce_video_optimised.mp4" autoplay loop muted playsinline class="project_video"> </video>
-            </div>
-            <div class="project_card_body">
-              <div class="project_card_header">
-                <h3 class="project_card_title">Self Motivated Projects</h3>
-              </div>
-              <p class="project_card_desc">
-                Clothing e-commerce site, features includes admin product edit page, shopping cart, registration, login, product search and filtering, and more to come.
-              </p>
-              <div class="timeline_tags">
-                <span>BunJS</span>
-                <span>TypeScript</span>
-                <span>JavaScript</span>
-                <span>MySQL</span>
-                <span>In Progress</span>
-              </div>
-            </div>
-          </div>
-
+      <figure class="viewer tabs" data-viewer style="--line:var(--rose);--ar:16/10" aria-label="NFE training platform">
+        <div class="screen">
+          <div class="slide on"><div class="shot"><video data-chapters src="/assets/videos/nfe-ride.mp4" poster="/assets/videos/nfe-ride-poster.webp" muted playsinline preload="metadata" aria-label="NFE public site: opening sequence, then each section in turn"></video></div></div>
         </div>
-      </div>
-    </section>
+        <div class="track">
+          <button class="play" type="button" aria-label="Pause"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="i-pause" d="M6 4h3v12H6zM11 4h3v12h-3z"/><path class="i-play" d="M6 4l10 6-10 6z"/></svg></button>
+          <ol class="stations" aria-label="Chapters">
+            <li><button type="button" data-t="0" data-note="The homepage I reworked, from its opening animation down.">Opening</button></li>
+            <li><button type="button" data-t="5.1" data-note="Three ways to train, laid out side by side.">Course formats</button></li>
+            <li><button type="button" data-t="12.35" data-note="How the training works, step by step.">Learning flow</button></li>
+            <li><button type="button" data-t="19.03" data-note="Where the course leads: a recognised certificate.">Certification</button></li>
+          </ol>
+          <span class="rail" aria-hidden="true"><span class="fill"></span></span>
+        </div>
+        <figcaption class="caption" aria-live="polite"></figcaption>
+      </figure>
+    </div>
+  </section>
 
-    <section class="contact_cta fade_in">
-      <div class="contact_cta_inner">
-        <span class="section_label">Contact Me</span>
-        <h2 class="section_title">Let's build something <em>together.</em></h2>
-        <p class="contact_cta_sub">Available for full-time roles and freelance work. Based in Vic, Australia.</p>
-        <a href="/contact" class="btn btn_primary">Get in touch →</a>
+  <section class="route" style="--line:var(--blue)" aria-labelledby="r-mk">
+    <div class="zone">
+      <div class="badge"><b>Microkeeper</b><span>2024 – 2026&ensp;·&ensp;Full stack</span></div>
+      <div class="notes">
+          <h3 id="r-mk">Payroll, connected and faster</h3>
+          <p class="lede">Two years on a payroll and workforce platform, taking small modules from requirements through to release and checking them in production.</p>
+          <ol class="stops">
+            <li><strong>Xero and Reckon</strong><span>Connected both accounting suites, so pay runs reach the books without anyone re-typing them.</span></li>
+            <li><strong>50 seconds to 3</strong><span>Indexes and reworked queries sped up key pages for businesses with up to 10,000 staff.</span></li>
+            <li><strong>Process automation</strong><span>A profile image pipeline on Cloudflare Images for thousands of users, and onboarding letters from templates.</span></li>
+            <li><strong>Skills HR and Super Funds</strong><span>Reworked layout and workflow, including on phones.</span></li>
+          </ol>
+          <ul class="status" aria-label="Stack"><li>PHP</li><li>MySQL</li><li>JavaScript</li><li>REST APIs</li><li>OAuth</li><li>Chart.js</li><li>Cloudflare Images</li></ul>
       </div>
-    </section>
-    
-    </main>
-    <script src="/js/script.js"></script>
-  </body>
+      <figure class="viewer tabs" data-viewer style="--line:var(--blue);--ar:1920/1016" aria-label="Microkeeper screen recordings">
+        <div class="screen">
+          <div class="slide"><div class="shot"><video src="/assets/videos/Dashboard_video_optimised.mp4" muted playsinline preload="metadata" aria-label="Analytics dashboard screen recording"></video></div></div>
+          <div class="slide"><div class="shot"><video src="/assets/videos/Skills_video_optimised.mp4" muted playsinline preload="metadata" aria-label="Skills HR module screen recording"></video></div></div>
+        </div>
+        <div class="track">
+          <button class="play" type="button" aria-label="Pause"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="i-pause" d="M6 4h3v12H6zM11 4h3v12h-3z"/><path class="i-play" d="M6 4l10 6-10 6z"/></svg></button>
+          <ol class="stations" aria-label="Recordings">
+            <li><button type="button" data-note="A live dashboard in Chart.js that each business can set up their own way.">Analytics dashboard</button></li>
+            <li><button type="button" data-note="Skills and documents checked in one place, on a desktop or a phone.">Skills HR</button></li>
+          </ol>
+          <span class="rail" aria-hidden="true"><span class="fill"></span></span>
+        </div>
+        <figcaption class="caption" aria-live="polite"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="experience" id="experience">
+    <h2>Experience</h2>
+    <div class="tt-wrap">
+      <table>
+        <thead><tr><th scope="col"><span class="sr-only">Line</span></th><th scope="col">When</th><th scope="col">Role</th><th scope="col">What I did</th></tr></thead>
+        <tbody>
+          <tr style="--c:var(--purple)"><td class="route-cell" aria-hidden="true"></td><td class="mono when">2026 – now</td><td><span class="role">Founder &amp; developer</span><span class="chip">signalSEO</span></td>
+            <td><ul><li>Built and shipped a full SaaS product on my own</li><li>Automated nightly rank checks and LLM-drafted fixes (Claude API), checked before they're shown</li><li>Stripe, Google, Firecrawl and DataForSEO integrations, with 100+ test files</li></ul></td></tr>
+          <tr style="--c:var(--rose)"><td class="route-cell" aria-hidden="true"></td><td class="mono when">Oct 2026 – now</td><td><span class="role">Software tester &amp; AI-assisted developer</span><span class="chip">NFE&ensp;·&ensp;contract</span></td>
+            <td><ul><li>Ran 60 user acceptance tests and reported to the owner daily</li><li>AI-assisted development: fixed bugs and shipped approved UI changes with Claude Code</li><li>Built a shared design system and a support desk with audit logging</li></ul></td></tr>
+          <tr style="--c:var(--blue)"><td class="route-cell" aria-hidden="true"></td><td class="mono when">2024 – 2026</td><td><span class="role">Full stack software engineer</span><span class="chip">Microkeeper</span></td>
+            <td><ul><li>Connected payroll to Xero and Reckon</li><li>Cut key page loads from about 50 seconds to 3</li><li>Built a live data analytics dashboard (Chart.js) and an automated image pipeline for thousands of users</li></ul></td></tr>
+          <tr style="--c:var(--grey)"><td class="route-cell" aria-hidden="true"></td><td class="mono when">2023 – 2024</td><td><span class="role">Web developer</span><span class="chip">Brandsmith&ensp;·&ensp;contract</span></td>
+            <td><ul><li>Built product, pricing and shipping features in C# and .NET</li><li>Built a registration flow with Google Maps</li></ul></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <dl class="skills">
+      <div style="--c:var(--teal)"><dt>Process automation</dt><dd>Scheduled jobs, accounting sync, document templates, automated testing with Playwright</dd></div>
+      <div style="--c:var(--purple)"><dt>AI &amp; LLMs</dt><dd>Claude API integration, prompt design, AI-assisted development with Claude Code and GitHub Copilot</dd></div>
+      <div style="--c:var(--red)"><dt>Data &amp; analytics</dt><dd>MySQL, PostgreSQL, query tuning, data pipelines, Chart.js dashboards, Google Search Console data</dd></div>
+      <div style="--c:var(--blue)"><dt>Integrations</dt><dd>REST APIs, OAuth, Xero, Reckon, Stripe, Resend, Google, Cloudflare Images</dd></div>
+      <div style="--c:var(--amber)"><dt>Languages</dt><dd>JavaScript, TypeScript, PHP, SQL, HTML, CSS, C#, Python</dd></div>
+    </dl>
+  </section>
+
+  <section class="about" id="about">
+    <h2>About</h2>
+    <div>
+      <p class="statement">I'm happiest where systems meet, <em>turning slow, manual work into software</em> that just runs.</p>
+      <p class="more">I'm a full-stack developer who splits my time between Australia and New Zealand. I like connecting APIs, speeding up slow data, and making the screens people use every day easier to get through. Right now I'm getting signalSEO ready to launch and testing NFE's platform on contract, using Claude Code and Copilot every day and checking what they write before it ships.</p>
+      <p class="more">Outside work you'll find me at the gym, catching up with friends, or deep in a board game or video game, with music on and my cats somewhere nearby. I'm usually first to try the newest AI tools, and then I work out which ones are actually worth using.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Based in</dt><dd>Victoria, Australia</dd></div>
+      <div><dt>Often in</dt><dd>Taranaki, New Zealand</dd></div>
+      <div><dt>Work rights</dt><dd>Australia and New Zealand</dd></div>
+      <div><dt>Studied</dt><dd>Bachelor of IT, Otago Polytechnic</dd></div>
+      <div><dt>Testing</dt><dd>ISTQB Foundation, in progress</dd></div>
+      <div><dt>Looking for</dt><dd>Full-time, wherever the work is</dd></div>
+    </dl>
+  </section>
+
+  <section class="terminus" id="contact">
+    <div>
+      <h2>End of the line. Let's talk.</h2>
+      <p class="lede">Hiring for a full-stack role, or want to talk about a project? Send a message and I'll get back to you.</p>
+      <ul class="direct">
+        <li><span class="ico"><svg class="icon"><use href="#i-mail"/></svg></span><div><small>Email</small><a href="mailto:albert.jordaan@outlook.com">albert.jordaan@outlook.com</a></div></li>
+        <li><span class="ico"><svg class="icon"><use href="#i-phone"/></svg></span><div><small>Phone</small><a href="tel:+61415377409">+61 415 377 409</a></div></li>
+        <li><span class="ico"><svg class="icon"><use href="#i-pin"/></svg></span><div><small>Location</small><span>Victoria, Australia · often in Taranaki, NZ</span></div></li>
+      </ul>
+      <div class="socials">
+        <a class="social" href="https://www.linkedin.com/in/albert-jordaan/" target="_blank" rel="noopener"><svg class="icon solid"><use href="#i-linkedin"/></svg>LinkedIn<svg class="icon"><use href="#i-out"/></svg></a>
+        <a class="social" href="https://github.com/albert203/" target="_blank" rel="noopener"><svg class="icon solid"><use href="#i-github"/></svg>GitHub<svg class="icon"><use href="#i-out"/></svg></a>
+        <a class="social" href="/assets/files/Albert_Jordaan_CV.pdf" download><svg class="icon"><use href="#i-doc"/></svg>CV</a>
+      </div>
+    </div>
+    <form id="contact_form" method="post" action="/api/contact" novalidate>
+      <div class="row2">
+        <label>Your name<span class="field"><svg class="icon"><use href="#i-user"/></svg><input name="name" autocomplete="name" placeholder="Jane Smith" maxlength="100" required></span></label>
+        <label>Email address<span class="field"><svg class="icon"><use href="#i-mail"/></svg><input name="email" type="email" autocomplete="email" placeholder="jane@company.com" maxlength="254" required></span></label>
+      </div>
+      <label>Subject<span class="field"><svg class="icon"><use href="#i-tag"/></svg><input name="subject" placeholder="Job opportunity / project enquiry" maxlength="150"></span></label>
+      <label>Message<span class="field tall"><svg class="icon"><use href="#i-chat"/></svg><textarea name="message" placeholder="Tell me about the role or project…" maxlength="5000" required></textarea></span></label>
+      <div class="cf-turnstile" data-sitekey="<%= turnstileSiteKey %>"></div>
+      <button class="btn send" type="submit"><svg class="icon"><use href="#i-send"/></svg><span>Send message</span></button>
+      <p class="notice err" id="form_error" role="alert" hidden><svg class="icon"><use href="#i-shield"/></svg><span></span></p>
+      <p class="notice ok" id="form_success" role="status" hidden><svg class="icon"><use href="#i-check"/></svg><span>Message sent. Thanks, I'll get back to you soon.</span></p>
+    </form>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="livery" aria-hidden="true"><span style="background:var(--purple)"></span><span style="background:var(--teal)"></span><span style="background:var(--rose)"></span><span style="background:var(--blue)"></span><span style="background:var(--red)"></span><span style="background:var(--green)"></span><span style="background:var(--amber)"></span></div>
+  <div class="foot-row">
+    <div><a class="name" href="#top">Albert Jordaan</a><p>Full-stack developer&ensp;·&ensp;Australia and New Zealand&ensp;·&ensp;Open to work wherever it is</p></div>
+    <nav aria-label="Footer"><ul><li><a href="#lines">Work</a></li><li><a href="#experience">Experience</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+    <div class="foot-icons">
+      <a href="https://www.linkedin.com/in/albert-jordaan/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg class="icon solid"><use href="#i-linkedin"/></svg></a>
+      <a href="https://github.com/albert203/" aria-label="GitHub" target="_blank" rel="noopener"><svg class="icon solid"><use href="#i-github"/></svg></a>
+      <a href="mailto:albert.jordaan@outlook.com" aria-label="Email"><svg class="icon"><use href="#i-mail"/></svg></a>
+    </div>
+  </div>
+  <div class="foot-base"><span>© 2026 Albert Jordaan</span><a href="#top">Back to top <svg class="icon" style="width:.9rem;height:.9rem;vertical-align:-.1em"><use href="#i-up"/></svg></a></div>
+</footer>
+
+<script src="/js/script.js"></script>
+</body>
 </html>

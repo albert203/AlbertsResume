@@ -47,6 +47,33 @@
         ],
         "createdAt": "2026-10-30T11:59:45.154Z",
         "reason": "Claude: section.form is padded clamp(4rem,10vw,7.5rem) var(--gutter >= 1.25rem); static detector cannot resolve clamp/var, so reports zero inset"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/landing/network-diagram.html"
+        ],
+        "createdAt": "2026-10-30T12:11:43.550Z",
+        "reason": "Claude: .legend and .route are padded with clamp()/var(--gutter >= 1.25rem); static detector cannot resolve them and reports zero inset"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/landing/rework-about.html"
+        ],
+        "createdAt": "2026-10-30T14:01:19.987Z",
+        "reason": "Claude: only flags are 2.8rem display h3 headings set at 1.05 leading by design; body text is 1.5-1.6"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/landing/network-diagram.html"
+        ],
+        "createdAt": "2026-10-30T14:14:16.443Z",
+        "reason": "Claude: only multi-line hits are display headings (h1 80px, h2 74px, h3 43px) set at 0.98-1.05 by design; body copy is 1.5-1.6"
       }
     ]
   }

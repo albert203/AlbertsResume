@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Albert Jordaan · Full-stack developer</title>
+<meta name="description" content="Albert Jordaan, full-stack developer based in Australia and New Zealand. Process automation, AI-assisted development with LLMs, API integrations and data analytics, shown on real SaaS products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800;900&family=Overpass+Mono:wght@500&display=swap">
+<style>
+  :root {
+    --ground: #f7f7f4; --panel: #ececea; --ink: #1d1d1b; --ink-soft: #55554f; --rule: #c9c9c3;
+    --blue: #0067b1; --red: #b8321f; --green: #007a51; --amber: #e8a200; --grey: #8a8a84;
+    --purple: #6b3fa0; --teal: #0e7c7b; --rose: #b0306a;
+    --sky: #e6eff8; --sky-line: #b9cfe5;
+    --sans: 'Overpass', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'Overpass Mono', ui-monospace, monospace;
+    --gutter: clamp(1.25rem, 4vw, 3.5rem);
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scrollbar-color: var(--ink) var(--panel); scroll-behavior: smooth; }
+  body { background: var(--ground); color: var(--ink); font: 400 1.0625rem/1.6 var(--sans); caret-color: var(--blue); }
+  ::selection { background: var(--amber); color: var(--ink); }
+  a { color: inherit; text-underline-offset: .2em; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  h1, h2, h3 { font-weight: 900; line-height: .98; letter-spacing: -.02em; text-wrap: balance; }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .bar { display: inline-block; width: 1.8rem; height: .5rem; border-radius: 1rem; vertical-align: .15em; margin-right: .5rem; flex: none; }
+  .icon { width: 1.15rem; height: 1.15rem; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .icon.solid { fill: currentColor; stroke: none; }
+
+  .nav { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .85rem var(--gutter); background: var(--ground); border-bottom: 4px solid var(--ink); }
+  .nav .name { font-weight: 900; font-size: 1.2rem; text-decoration: none; }
+  .nav ul { display: flex; gap: clamp(.8rem, 2.4vw, 2rem); list-style: none; padding: 0; font-weight: 600; font-size: .95rem; }
+  .nav a { text-decoration: none; display: inline-flex; align-items: center; }
+  .nav a .bar { width: 1.1rem; height: .4rem; transition: width .3s var(--ease); }
+  .nav a:hover .bar, .nav a[aria-current] .bar { width: 1.8rem; }
+
+  /* hero: headline band, then the full-width network map */
+  .intro-band { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: end; padding: clamp(2.5rem, 6vw, 4.5rem) var(--gutter) 1.5rem; }
+  .intro-band h1 { font-size: clamp(2.8rem, 6vw, 5rem); }
+  .intro-band p { margin: 1.1rem 0 1.6rem; color: var(--ink-soft); font-size: 1.12rem; max-width: 40ch; }
+  .key { display: grid; gap: .5rem; font-size: .92rem; }
+  .key p { font-size: .95rem; color: var(--ink-soft); margin: 0; max-width: none; }
+  .key span { display: flex; align-items: center; }
+  .key .row { display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .9rem 1.3rem; font: 800 .95rem var(--sans); text-decoration: none; border-radius: 2rem; transition: transform .2s var(--ease), background .2s; border: 2px solid transparent; cursor: pointer; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--amber); color: var(--ink); }
+  .btn.primary:hover { background: #ffb81f; }
+  .btn.ghost { border-color: currentColor; color: inherit; background: transparent; }
+
+  .map-wrap { position: relative; overflow-x: auto; padding: .5rem var(--gutter) 2.5rem; }
+  .map { display: block; width: 100%; min-width: 1100px; height: auto; }
+  .map .zone { stroke-width: 2; }
+  .map .tab rect { fill: var(--ink); }
+  .map .tab text { font: 800 16px var(--sans); fill: #fff; stroke: none; }
+  .map .line { fill: none; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+  .map .hub { fill: #fff; stroke: var(--ink); stroke-width: 7; }
+  .map .platform { fill: #fff; stroke: var(--ink); stroke-width: 4; cursor: pointer; transform-box: fill-box; transform-origin: center; transition: transform .25s var(--ease), fill .2s; }
+  .map .platform:hover, .map .platform:focus-visible { transform: scale(1.25); fill: var(--amber); outline: none; }
+  .map text { font: 800 17px var(--sans); fill: var(--ink); paint-order: stroke; stroke: var(--ground); stroke-width: 6px; stroke-linejoin: round; }
+  .map .train { fill: var(--ink); pointer-events: none; }
+  .motion .map .line { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: draw 1.8s var(--ease) forwards; animation-delay: var(--delay, 0s); }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .tip { position: absolute; z-index: 5; max-width: 17rem; padding: .7rem .9rem; background: #fff; border: 3px solid var(--ink); border-radius: .5rem; font-size: .9rem; line-height: 1.45; pointer-events: none; opacity: 0; transform: translateY(6px); transition: opacity .2s, transform .3s var(--ease); }
+  .tip.on { opacity: 1; transform: none; }
+
+  /* routes */
+  .intro { padding: clamp(4rem, 9vw, 7rem) var(--gutter) 1rem; border-top: 1px solid var(--rule); }
+  .intro h2 { font-size: clamp(2.4rem, 5vw, 4rem); max-width: 18ch; }
+  .intro p { max-width: 62ch; color: var(--ink-soft); font-size: 1.12rem; margin-top: 1.2rem; }
+  /* each project is one zone, like the map: tinted ground, a name tab on its edge, text and screen together */
+  .route { padding: clamp(2.5rem, 5vw, 4rem) var(--gutter); }
+  .zone { position: relative; display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.3fr); gap: clamp(2rem, 4.5vw, 4rem); align-items: center;
+    padding: clamp(2.6rem, 4.5vw, 3.6rem) clamp(1.4rem, 3.5vw, 3rem) clamp(2rem, 3.5vw, 3rem); border-radius: 24px;
+    background: color-mix(in srgb, var(--line) 6%, var(--ground)); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--line) 38%, transparent); }
+  .route.flip .zone { grid-template-columns: minmax(0, 1.3fr) minmax(0, .85fr); }
+  .route.flip .notes { order: 2; }
+  .badge { position: absolute; top: 0; left: clamp(1.4rem, 3.5vw, 3rem); translate: 0 -50%; display: inline-flex; border-radius: 2rem; overflow: hidden; box-shadow: 0 10px 24px -16px rgba(29,29,27,.6); }
+  .route.flip .badge { left: auto; right: clamp(1.4rem, 3.5vw, 3rem); }
+  .badge b { display: flex; align-items: center; gap: .55rem; padding: .55rem 1.05rem .5rem .6rem; background: var(--line); color: #fff; font-weight: 900; font-size: 1.05rem; }
+  .badge b::before { content: ""; width: 1.25rem; height: 1.25rem; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 4px var(--ink); }
+  .badge span { display: flex; align-items: center; padding: .6rem 1.1rem .55rem; background: #fff; font: 700 .85rem var(--mono); color: var(--ink); }
+  .route h3 { font-size: clamp(2rem, 3.2vw, 2.7rem); line-height: 1.05; margin-bottom: .9rem; }
+  .lede { font-size: 1.1rem; line-height: 1.6; color: var(--ink); max-width: 48ch; }
+  .stops { list-style: none; padding: 0; margin: 1.7rem 0 0; position: relative; }
+  .stops::before { content: ""; position: absolute; left: 9px; top: .7rem; bottom: .7rem; width: 6px; border-radius: 6px; background: var(--line); }
+  .stops li { position: relative; padding: 0 0 1.05rem 2.4rem; }
+  .stops li:last-child { padding-bottom: 0; }
+  .stops li::before { content: ""; position: absolute; left: 0; top: .3rem; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 4.5px var(--ink); transition: background .2s, transform .25s var(--ease); }
+  .stops li:hover::before { background: var(--amber); transform: scale(1.15); }
+  .stops strong { display: block; font-weight: 800; line-height: 1.3; }
+  .stops span { display: block; color: var(--ink-soft); font-size: .97rem; line-height: 1.5; margin-top: .15rem; }
+  /* square status tags for the stack */
+  .status { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.7rem 0 0; padding: 0; list-style: none; }
+  .status li { display: inline-flex; align-items: center; gap: .45rem; padding: .4rem .7rem; border-radius: 3px; background: #fff; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--line) 45%, var(--rule)); font: 700 .8rem var(--mono); color: var(--ink); }
+  .status li::before { content: ""; width: .5rem; height: .5rem; background: var(--line); }
+
+  /* viewer: one screen, a line of stations underneath; each station is a view or a chapter */
+  .viewer { position: relative; margin: 0; }
+  .screen { position: relative; aspect-ratio: var(--ar, 16 / 10); overflow: hidden; border-radius: 14px; background: #fff;
+    box-shadow: 0 0 0 1px rgba(29,29,27,.12), 0 28px 60px -34px rgba(29,29,27,.5); }
+  .slide { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity .6s var(--ease); }
+  .slide.on { opacity: 1; }
+  .shot { position: relative; width: 100%; }
+  .shot img, .shot video { display: block; width: 100%; height: auto; }
+  .pin { position: absolute; translate: -50% -50%; width: 2rem; height: 2rem; border-radius: 50%; border: 3px solid #fff; background: var(--line); color: #fff; font: 900 .85rem var(--sans); cursor: pointer;
+    box-shadow: 0 6px 16px -6px rgba(29,29,27,.6); transition: transform .2s var(--ease); }
+  .pin:hover, .pin:focus-visible, .pin[aria-expanded="true"] { transform: scale(1.15); outline: none; }
+  .motion .pin::after { content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 2px solid var(--line); opacity: 0; animation: ping 2.6s var(--ease) infinite; }
+  @keyframes ping { 0% { opacity: .8; transform: scale(.7); } 70%, 100% { opacity: 0; transform: scale(1.35); } }
+  .note { position: absolute; z-index: 3; width: 17rem; padding: .7rem .9rem; background: #fff; border: 3px solid var(--ink); border-radius: .5rem; font-size: .9rem; line-height: 1.45; pointer-events: none; opacity: 0; transform: translateY(6px); transition: opacity .2s, transform .3s var(--ease); }
+  .note.on { opacity: 1; transform: none; }
+  .track { position: relative; display: grid; grid-template-columns: auto 1fr; align-items: start; gap: 1rem; margin-top: 1.3rem; }
+  .play { width: 2.8rem; height: 2.8rem; border-radius: 50%; border: 0; background: var(--line); color: #fff; display: grid; place-items: center; cursor: pointer; transition: transform .2s var(--ease); }
+  .play:hover { transform: scale(1.06); }
+  .play svg { width: 1rem; height: 1rem; fill: currentColor; }
+  .play .i-play { display: none; } .viewer.paused .play .i-play { display: block; } .viewer.paused .play .i-pause { display: none; }
+  .stations { position: relative; z-index: 1; list-style: none; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+  .stations button { position: relative; width: 100%; padding: 2.7rem .4rem 0 0; background: none; border: 0; font: 800 .9rem/1.3 var(--sans); color: var(--ink-soft); text-align: left; cursor: pointer; transition: color .2s; }
+  .stations button::before { content: ""; position: absolute; left: 0; top: .78rem; width: 1.25rem; height: 1.25rem; border-radius: 50%; background: #fff; border: 3.5px solid var(--ink); transition: background .25s, transform .25s var(--ease); }
+  .stations button:hover, .stations button[aria-current] { color: var(--ink); }
+  .stations button.done::before { background: color-mix(in srgb, var(--line) 45%, #fff); }
+  .stations button[aria-current]::before { background: var(--line); transform: scale(1.15); }
+  .track .rail { position: absolute; left: calc(2.8rem + 1rem + .5rem); right: 0; top: 1.4rem; height: 8px; translate: 0 -50%; border-radius: 8px; background: color-mix(in srgb, var(--line) 25%, transparent); pointer-events: none; }
+  .track .fill { position: absolute; inset: 0 auto 0 0; width: var(--p, 0%); border-radius: inherit; background: var(--line); }
+  .tabs .track { align-items: center; }
+  .tabs .rail { display: none; }
+  .tabs .stations { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .tabs .stations button { width: auto; padding: .6rem 1.1rem; border-radius: 2rem; isolation: isolate; overflow: hidden; background: color-mix(in srgb, var(--line) 10%, #fff); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--line) 35%, transparent); }
+  .tabs .stations button::before { top: 0; bottom: 0; height: auto; width: var(--f, 0%); border: 0; border-radius: 0; z-index: -1; background: color-mix(in srgb, var(--line) 22%, #fff); transform: none; transition: none; }
+  .tabs .stations button[aria-current] { color: var(--ink); box-shadow: inset 0 0 0 2px var(--line); }
+  .tabs .stations button[aria-current]::before, .tabs .stations button.done::before { background: color-mix(in srgb, var(--line) 22%, #fff); transform: none; }
+  .hold { position: absolute; top: .8rem; right: .8rem; z-index: 2; display: flex; align-items: center; gap: .45rem; padding: .45rem .8rem; border-radius: 2rem; background: rgba(29,29,27,.82); color: #fff; font: 700 .82rem var(--sans); pointer-events: none; opacity: 0; transform: translateY(-4px); transition: opacity .2s, transform .3s var(--ease); }
+  .hold svg { width: .8rem; height: .8rem; fill: currentColor; }
+  .viewer.holding .hold { opacity: 1; transform: none; }
+  .caption { margin-top: 1rem; min-height: 1.6em; color: var(--ink); font-weight: 600; }
+
+  /* experience */
+  .experience { padding: clamp(4rem, 9vw, 7rem) var(--gutter); }
+  .experience h2 { font-size: clamp(2.2rem, 4.5vw, 3.6rem); margin-bottom: 1.6rem; }
+  .tt-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 40rem; }
+  th { text-align: left; font: 500 .8rem var(--mono); text-transform: uppercase; letter-spacing: .06em; padding: .7rem 1rem .7rem 0; border-bottom: 4px solid var(--ink); }
+  td { padding: 1.2rem 1rem 1.2rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  td .role { font-weight: 800; display: block; }
+  td ul { padding-left: 1.1rem; color: var(--ink-soft); }
+  td ul li + li { margin-top: .2rem; }
+  /* the career runs down the table as one line, changing colour at each job */
+  .route-cell { position: relative; width: 3rem; padding: 0; }
+  .route-cell::before { content: ""; position: absolute; left: 1rem; top: 0; bottom: -1px; width: 8px; background: var(--c); }
+  tbody tr:first-child .route-cell::before { top: 1.75rem; border-radius: 8px 8px 0 0; }
+  tbody tr:last-child .route-cell::before { bottom: auto; height: 1.75rem; border-radius: 0 0 8px 8px; }
+  .route-cell::after { content: ""; position: absolute; left: calc(1rem + 4px - 11px); top: calc(1.75rem - 11px); width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 4.5px solid var(--ink); box-sizing: border-box; }
+  .when { font-size: 1rem; white-space: nowrap; }
+  .chip { display: inline-block; margin-top: .35rem; padding: .15rem .65rem; border-radius: 2rem; font-weight: 700; font-size: .88rem; background: color-mix(in srgb, var(--c) 12%, #fff); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--c) 55%, transparent); }
+  tbody tr { transition: background .2s; }
+  tbody tr:hover { background: color-mix(in srgb, var(--c) 5%, transparent); }
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr)); gap: 1.4rem 2rem; margin-top: 2.6rem; }
+  .skills dt { font-weight: 800; display: flex; align-items: center; gap: .65rem; }
+  .skills dt::before { content: ""; flex: none; width: 1.6rem; height: .5rem; border-radius: 1rem; background: var(--c); }
+  .skills dd { margin: .3rem 0 0 2.25rem; color: var(--ink-soft); font-size: .95rem; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .about { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); column-gap: clamp(2rem, 7vw, 7rem); align-items: start; padding: clamp(4rem, 9vw, 7rem) var(--gutter); background: var(--panel); }
+  .about h2 { grid-column: 1 / -1; font-size: clamp(2.2rem, 4.5vw, 3.6rem); margin-bottom: 1.6rem; }
+  .statement { font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 800; line-height: 1.32; letter-spacing: -.01em; max-width: 22ch; text-wrap: balance; }
+  .statement em { font-style: normal; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--amber) 55%, transparent) 62%); }
+  .about .more { margin-top: 1.3rem; color: var(--ink-soft); max-width: 56ch; }
+  .facts { display: grid; margin: .4rem 0 0; }
+  .facts div { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: .6rem; padding: .7rem 0; }
+  .facts dt { order: 1; font: 700 .82rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
+  .facts div::after { content: ""; order: 2; border-bottom: 2px dotted var(--rule); transform: translateY(-.25rem); }
+  .facts dd { order: 3; margin: 0; font-weight: 800; text-align: right; }
+  .flag { font: 500 .78rem var(--mono); color: var(--red); }
+  .pending { display: block; margin-top: 1rem; }
+
+  /* contact: light blue terminus */
+  .terminus { background: var(--sky); padding: clamp(4rem, 9vw, 7rem) var(--gutter); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  .terminus h2 { font-size: clamp(2.8rem, 6vw, 4.6rem); }
+  .terminus .lede { margin-top: 1.1rem; color: var(--ink-soft); max-width: 40ch; font-size: 1.08rem; }
+  .direct { list-style: none; padding: 0; margin-top: 2rem; display: grid; gap: 1.1rem; }
+  .direct li { display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: center; }
+  .direct .ico { display: grid; place-items: center; width: 2.7rem; height: 2.7rem; border-radius: 50%; background: var(--blue); color: #fff; }
+  .direct small { display: block; font: 500 .75rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
+  .direct a, .direct span { font-weight: 700; text-decoration: none; }
+  .direct a:hover { color: var(--blue); }
+  .socials { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
+  .social { display: inline-flex; align-items: center; gap: .55rem; padding: .7rem 1.15rem; border: 2px solid var(--blue); border-radius: 2rem; color: var(--blue); font-weight: 800; font-size: .95rem; text-decoration: none; transition: background .2s, color .2s; }
+  .social:hover { background: var(--blue); color: #fff; }
+  .social .icon:last-child { width: .9rem; height: .9rem; }
+  form { display: grid; gap: 1.1rem; background: #fff; border-radius: 18px; padding: clamp(1.5rem, 3vw, 2.5rem); box-shadow: 0 0 0 1px var(--sky-line), 0 30px 60px -42px rgba(0,60,120,.55); }
+  .row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
+  label { display: grid; gap: .4rem; font-weight: 800; font-size: .9rem; }
+  .field { position: relative; }
+  .field .icon { position: absolute; left: .9rem; top: 50%; translate: 0 -50%; color: var(--blue); pointer-events: none; }
+  .field.tall .icon { top: 1.45rem; }
+  input, textarea { width: 100%; font: inherit; font-weight: 400; color: var(--ink); background: #f6f9fc; border: 2px solid var(--sky-line); border-radius: .6rem; padding: .75rem .9rem .75rem 2.7rem; transition: border-color .2s, box-shadow .2s; }
+  input::placeholder, textarea::placeholder { color: #7b8794; }
+  input:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(0,103,177,.15); background: #fff; }
+  textarea { min-height: 9rem; resize: vertical; }
+  .captcha { display: flex; align-items: center; gap: .6rem; padding: .8rem 1rem; border: 2px dashed var(--sky-line); border-radius: .6rem; font-size: .88rem; color: var(--ink-soft); }
+  .btn.send { background: var(--blue); color: #fff; justify-self: start; }
+  .btn.send:hover { background: #00589a; }
+  .notice { display: flex; gap: .6rem; align-items: flex-start; padding: .85rem 1rem; border-radius: .6rem; font-size: .92rem; }
+  .notice[hidden] { display: none; }
+  .notice.ok { background: #e7f5ee; color: #0b6b45; border: 1px solid #a9dcc3; }
+
+  /* footer: the lines run out along the bottom of the page */
+  .foot { background: var(--ground); }
+  .foot .livery { display: flex; height: 10px; }
+  .foot .livery span { flex: 1; }
+  .foot-row { display: grid; grid-template-columns: minmax(0, 1.2fr) auto auto; gap: clamp(1.5rem, 4vw, 4rem); align-items: center; padding: 2.4rem var(--gutter) 1.6rem; }
+  .foot .name { font-weight: 900; font-size: 1.25rem; text-decoration: none; }
+  .foot-row p { color: var(--ink-soft); font-size: .95rem; margin-top: .25rem; }
+  .foot nav ul { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; list-style: none; padding: 0; font-weight: 700; font-size: .95rem; }
+  .foot nav a { text-decoration: none; } .foot nav a:hover { text-decoration: underline; }
+  .foot-icons { display: flex; gap: .5rem; }
+  .foot-icons a { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; border: 2px solid var(--ink); transition: background .2s, color .2s; }
+  .foot-icons a:hover { background: var(--ink); color: var(--ground); }
+  .foot-base { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1rem var(--gutter) 1.6rem; border-top: 1px solid var(--rule); font-size: .85rem; color: var(--ink-soft); }
+  .foot-base a { text-decoration: none; font-weight: 700; color: var(--ink); }
+
+  @media (max-width: 900px) {
+    .nav ul li:not(:last-child) { display: none; }
+    .intro-band, .about, .terminus, .foot-row { grid-template-columns: 1fr; }
+    .zone { grid-template-columns: 1fr; }
+    .route.flip .notes { order: 0; }
+    .route.flip .badge { left: clamp(1.4rem, 3.5vw, 3rem); right: auto; }
+    .row2 { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3.5h3.5l1.8 4.6-2.3 1.4a11.5 11.5 0 0 0 6.5 6.5l1.4-2.3 4.6 1.8V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5.5a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11.3a7 7 0 0 1 14 0C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.7" r="2.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4z"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.7 7 9 4-1.3 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-1.9c-3.12.68-3.78-1.5-3.78-1.5-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.68.08-.68 1.12.08 1.72 1.15 1.72 1.15 1 1.72 2.63 1.22 3.27.93.1-.72.39-1.22.71-1.5-2.49-.28-5.11-1.25-5.11-5.55 0-1.22.44-2.22 1.15-3-.11-.29-.5-1.43.11-2.98 0 0 .94-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.69.11 2.98.72.78 1.15 1.78 1.15 3 0 4.31-2.62 5.26-5.12 5.54.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8z"/></symbol>
+</svg>
+
+<nav class="nav" aria-label="Main">
+  <a class="name" href="#top">Albert Jordaan</a>
+  <ul>
+    <li><a href="#lines"><span class="bar" style="background:var(--purple)"></span>Work</a></li>
+    <li><a href="#experience"><span class="bar" style="background:var(--red)"></span>Experience</a></li>
+    <li><a href="#about"><span class="bar" style="background:var(--green)"></span>About</a></li>
+    <li><a href="#contact"><span class="bar" style="background:var(--blue)"></span>Contact</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+  <section class="intro-band" aria-labelledby="hero-title">
+    <div>
+      <h1 id="hero-title">Systems that run themselves.</h1>
+      <p>I'm Albert, a full-stack developer based in Australia and often in New Zealand. I look for the slow, manual parts of a business and build software that does them instead: process automation, LLM features, API integrations and data tools.</p>
+      <div class="actions">
+        <a class="btn primary" href="../../../public/assets/files/Albert_Jordaan_CV.pdf" download>Download CV</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="key" aria-label="Map key">
+      <p>Each coloured area is a project and each line is something I built, coloured by the kind of work. Hover a stop to see what it does.</p>
+      <div class="row"><span><span class="bar" style="background:var(--purple)"></span>LLM &amp; AI features</span><span><span class="bar" style="background:var(--teal)"></span>Process automation</span><span><span class="bar" style="background:var(--rose)"></span>Testing &amp; workflow tools</span><span><span class="bar" style="background:var(--blue)"></span>API integrations</span><span><span class="bar" style="background:var(--red)"></span>Data &amp; performance</span><span><span class="bar" style="background:var(--green)"></span>Media pipelines</span><span><span class="bar" style="background:var(--amber)"></span>UI/UX</span></div>
+    </div>
+  </section>
+
+  <div class="map-wrap">
+    <svg class="map" viewBox="0 0 1440 950" role="group" aria-label="System map of the projects Albert has built: Microkeeper, signalSEO and NFE"></svg>
+    <div class="tip" role="status" aria-live="polite"></div>
+  </div>
+
+  <section class="intro" id="lines">
+    <h2>Work projects</h2>
+    <p>Three projects, newest first. signalSEO is my own product. At NFE I test and improve a live training platform on contract. At Microkeeper I spent two years on payroll software used by businesses across Australia.</p>
+    <p>Each one shows what the software does, what I built and what it runs on. The recordings play when you reach them. Hover one to pause it, or pick a tab to skip ahead.</p>
+  </section>
+
+  <section class="route" style="--line:var(--purple)" aria-labelledby="r-signal">
+    <div class="zone">
+      <div class="badge"><b>signalSEO</b><span>2026 – now&ensp;·&ensp;Founder</span></div>
+      <div class="notes">
+          <h3 id="r-signal">My own product</h3>
+          <p class="lede">SEO and business-positioning software that shows local businesses where they stand, what they're doing wrong and how to fix it, then keeps watch, so they rank better without the guesswork and get back to running their business.</p>
+          <ol class="stops">
+            <li><strong>Understand</strong><span>A plain-English report on where they rank, who's beating them, and why.</span></li>
+            <li><strong>Monitor</strong><span>Rankings checked every night, plus rival moves and what Google's AI answer says.</span></li>
+            <li><strong>Control</strong><span>A short list of fixes for the week, drafted by Claude and checked before anyone sees it.</span></li>
+            <li><strong>Built on my own</strong><span>LLM integration, data pipelines from Firecrawl, DataForSEO and Google, and Stripe billing, with over 100 automated test files.</span></li>
+          </ol>
+          <ul class="status" aria-label="Stack"><li>TypeScript</li><li>Node</li><li>Express</li><li>PostgreSQL</li><li>Claude API</li><li>Firecrawl</li><li>DataForSEO</li><li>Stripe</li></ul>
+      </div>
+      <figure class="viewer tabs" data-viewer style="--line:var(--purple);--ar:16/10" aria-label="signalSEO">
+        <div class="screen">
+          <div class="slide on"><div class="shot"><video data-chapters src="../../captures/signalseo/signal-ride.mp4" poster="../../captures/signalseo/signal-ride-poster.webp" muted playsinline preload="metadata" aria-label="signalSEO site: the rival check, then each section in turn"></video></div></div>
+        </div>
+        <div class="track">
+          <button class="play" type="button" aria-label="Pause"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="i-pause" d="M6 4h3v12H6zM11 4h3v12h-3z"/><path class="i-play" d="M6 4l10 6-10 6z"/></svg></button>
+          <ol class="stations" aria-label="Chapters">
+            <li><button type="button" data-t="0" data-note="Paste a website and see who outranks it, built from scraped pages and live Google data.">Rival check</button></li>
+            <li><button type="button" data-t="4.03" data-note="Owners get one clear answer instead of hundreds of keywords.">One answer</button></li>
+            <li><button type="button" data-t="11.14" data-note="Claude drafts the wording for each fix, and automated checks run before it's shown.">Report &amp; fixes</button></li>
+            <li><button type="button" data-t="17.4" data-note="Every night it reads Google's AI answer and flags whether it cites you or a rival.">AI answers</button></li>
+            <li><button type="button" data-t="23.98" data-note="Every number says where it came from: measured, estimated or written by AI.">Sources</button></li>
+          </ol>
+          <span class="rail" aria-hidden="true"><span class="fill"></span></span>
+        </div>
+        <figcaption class="caption" aria-live="polite"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="route flip" style="--line:var(--rose)" aria-labelledby="r-nfe">
+    <div class="zone">
+      <div class="badge"><b>NFE</b><span>Oct 2026 – now&ensp;·&ensp;Contract</span></div>
+      <div class="notes">
+          <h3 id="r-nfe">Testing and improving a live platform</h3>
+          <p class="lede">A training platform that takes beauty therapists from application to certificate. I test it, fix what I find, and ship approved changes for participants, tutors and admins using Claude Code.</p>
+          <ol class="stops">
+            <li><strong>60 acceptance tests</strong><span>Then automated the click-through checks with AI agents and Playwright.</span></li>
+            <li><strong>Public site rework</strong><span>The homepage, training, register and sign-in pages, to an approved design.</span></li>
+            <li><strong>One design system</strong><span>Labels, icons and tables that look the same for every role.</span></li>
+            <li><strong>Support desk</strong><span>Staff can fix sign-in problems, and every action is logged.</span></li>
+          </ol>
+          <ul class="status" aria-label="Stack"><li>TypeScript</li><li>Claude Code</li><li>Playwright</li><li>Clerk</li><li>Replit</li></ul>
+      </div>
+      <figure class="viewer tabs" data-viewer style="--line:var(--rose);--ar:16/10" aria-label="NFE training platform">
+        <div class="screen">
+          <div class="slide on"><div class="shot"><video data-chapters src="../../captures/nfe/nfe-ride-hd.mp4" poster="../../captures/nfe/nfe-ride-hd-poster.webp" muted playsinline preload="metadata" aria-label="NFE public site: opening sequence, then each section in turn"></video></div></div>
+        </div>
+        <div class="track">
+          <button class="play" type="button" aria-label="Pause"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="i-pause" d="M6 4h3v12H6zM11 4h3v12h-3z"/><path class="i-play" d="M6 4l10 6-10 6z"/></svg></button>
+          <ol class="stations" aria-label="Chapters">
+            <li><button type="button" data-t="0" data-note="The homepage I reworked, from its opening animation down.">Opening</button></li>
+            <li><button type="button" data-t="5.1" data-note="Three ways to train, laid out side by side.">Course formats</button></li>
+            <li><button type="button" data-t="12.35" data-note="How the training works, step by step.">Learning flow</button></li>
+            <li><button type="button" data-t="19.03" data-note="Where the course leads: a recognised certificate.">Certification</button></li>
+          </ol>
+          <span class="rail" aria-hidden="true"><span class="fill"></span></span>
+        </div>
+        <figcaption class="caption" aria-live="polite"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="route" style="--line:var(--blue)" aria-labelledby="r-mk">
+    <div class="zone">
+      <div class="badge"><b>Microkeeper</b><span>2024 – 2026&ensp;·&ensp;Full stack</span></div>
+      <div class="notes">
+          <h3 id="r-mk">Payroll, connected and faster</h3>
+          <p class="lede">Two years on a payroll and workforce platform, taking small modules from requirements through to release and checking them in production.</p>
+          <ol class="stops">
+            <li><strong>Xero and Reckon</strong><span>Connected both accounting suites, so pay runs reach the books without anyone re-typing them.</span></li>
+            <li><strong>50 seconds to 3</strong><span>Indexes and reworked queries sped up key pages for businesses with up to 10,000 staff.</span></li>
+            <li><strong>Process automation</strong><span>A profile image pipeline on Cloudflare Images for thousands of users, and onboarding letters from templates.</span></li>
+            <li><strong>Skills HR and Super Funds</strong><span>Reworked layout and workflow, including on phones.</span></li>
+          </ol>
+          <ul class="status" aria-label="Stack"><li>PHP</li><li>MySQL</li><li>JavaScript</li><li>REST APIs</li><li>OAuth</li><li>Chart.js</li><li>Cloudflare Images</li></ul>
+      </div>
+      <figure class="viewer tabs" data-viewer style="--line:var(--blue);--ar:1920/1016" aria-label="Microkeeper screen recordings">
+        <div class="screen">
+          <div class="slide"><div class="shot"><video src="../../../public/assets/videos/Dashboard_video_optimised.mp4" muted playsinline preload="metadata" aria-label="Analytics dashboard screen recording"></video></div></div>
+          <div class="slide"><div class="shot"><video src="../../../public/assets/videos/Skills_video_optimised.mp4" muted playsinline preload="metadata" aria-label="Skills HR module screen recording"></video></div></div>
+        </div>
+        <div class="track">
+          <button class="play" type="button" aria-label="Pause"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="i-pause" d="M6 4h3v12H6zM11 4h3v12h-3z"/><path class="i-play" d="M6 4l10 6-10 6z"/></svg></button>
+          <ol class="stations" aria-label="Recordings">
+            <li><button type="button" data-note="A live dashboard in Chart.js that each business can set up their own way.">Analytics dashboard</button></li>
+            <li><button type="button" data-note="Skills and documents checked in one place, on a desktop or a phone.">Skills HR</button></li>
+          </ol>
+          <span class="rail" aria-hidden="true"><span class="fill"></span></span>
+        </div>
+        <figcaption class="caption" aria-live="polite"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="experience" id="experience">
+    <h2>Experience</h2>
+    <div class="tt-wrap">
+      <table>
+        <thead><tr><th scope="col"><span class="sr-only">Line</span></th><th scope="col">When</th><th scope="col">Role</th><th scope="col">What I did</th></tr></thead>
+        <tbody>
+          <tr style="--c:var(--purple)"><td class="route-cell" aria-hidden="true"></td><td class="mono when">2026 – now</td><td><span class="role">Founder &amp; developer</span><span class="chip">signalSEO</span></td>
+            <td><ul><li>Built and shipped a full SaaS product on my own</li><li>Automated nightly rank checks and LLM-drafted fixes (Claude API), checked before they're shown</li><li>Stripe, Google, Firecrawl and DataForSEO integrations, with 100+ test files</li></ul></td></tr>
+          <tr style="--c:var(--rose)"><td class="route-cell" aria-hidden="true"></td><td class="mono when">Oct 2026 – now</td><td><span class="role">Software tester &amp; AI-assisted developer</span><span class="chip">NFE&ensp;·&ensp;contract</span></td>
+            <td><ul><li>Ran 60 user acceptance tests and reported to the owner daily</li><li>AI-assisted development: fixed bugs and shipped approved UI changes with Claude Code</li><li>Built a shared design system and a support desk with audit logging</li></ul></td></tr>
+          <tr style="--c:var(--blue)"><td class="route-cell" aria-hidden="true"></td><td class="mono when">2024 – 2026</td><td><span class="role">Full stack software engineer</span><span class="chip">Microkeeper</span></td>
+            <td><ul><li>Connected payroll to Xero and Reckon</li><li>Cut key page loads from about 50 seconds to 3</li><li>Built a live data analytics dashboard (Chart.js) and an automated image pipeline for thousands of users</li></ul></td></tr>
+          <tr style="--c:var(--grey)"><td class="route-cell" aria-hidden="true"></td><td class="mono when">2023 – 2024</td><td><span class="role">Web developer</span><span class="chip">Brandsmith&ensp;·&ensp;contract</span></td>
+            <td><ul><li>Built product, pricing and shipping features in C# and .NET</li><li>Built a registration flow with Google Maps</li></ul></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <dl class="skills">
+      <div style="--c:var(--teal)"><dt>Process automation</dt><dd>Scheduled jobs, accounting sync, document templates, automated testing with Playwright</dd></div>
+      <div style="--c:var(--purple)"><dt>AI &amp; LLMs</dt><dd>Claude API integration, prompt design, AI-assisted development with Claude Code and GitHub Copilot</dd></div>
+      <div style="--c:var(--red)"><dt>Data &amp; analytics</dt><dd>MySQL, PostgreSQL, query tuning, data pipelines, Chart.js dashboards, Google Search Console data</dd></div>
+      <div style="--c:var(--blue)"><dt>Integrations</dt><dd>REST APIs, OAuth, Xero, Reckon, Stripe, Resend, Google, Cloudflare Images</dd></div>
+      <div style="--c:var(--amber)"><dt>Languages</dt><dd>JavaScript, TypeScript, PHP, SQL, HTML, CSS, C#, Python</dd></div>
+    </dl>
+  </section>
+
+  <section class="about" id="about">
+    <h2>About</h2>
+    <div>
+      <p class="statement">I'm happiest where systems meet, <em>turning slow, manual work into software</em> that just runs.</p>
+      <p class="more">I'm a full-stack developer who splits my time between Australia and New Zealand. I like connecting APIs, speeding up slow data, and making the screens people use every day easier to get through. Right now I'm getting signalSEO ready to launch and testing NFE's platform on contract, using Claude Code and Copilot every day and checking what they write before it ships.</p>
+      <p class="more">Outside work you'll find me at the gym, catching up with friends, or deep in a board game or video game, with music on and my cats somewhere nearby. I'm usually first to try the newest AI tools, and then I work out which ones are actually worth using.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Based in</dt><dd>Victoria, Australia</dd></div>
+      <div><dt>Often in</dt><dd>Taranaki, New Zealand</dd></div>
+      <div><dt>Work rights</dt><dd>Australia and New Zealand</dd></div>
+      <div><dt>Studied</dt><dd>Bachelor of IT, Otago Polytechnic</dd></div>
+      <div><dt>Testing</dt><dd>ISTQB Foundation, in progress</dd></div>
+      <div><dt>Looking for</dt><dd>Full-time, wherever the work is</dd></div>
+    </dl>
+  </section>
+
+  <section class="terminus" id="contact">
+    <div>
+      <h2>End of the line. Let's talk.</h2>
+      <p class="lede">Hiring for a full-stack role, or want to talk about a project? Send a message and I'll get back to you.</p>
+      <ul class="direct">
+        <li><span class="ico"><svg class="icon"><use href="#i-mail"/></svg></span><div><small>Email</small><a href="mailto:albert.jordaan@outlook.com">albert.jordaan@outlook.com</a></div></li>
+        <li><span class="ico"><svg class="icon"><use href="#i-phone"/></svg></span><div><small>Phone</small><a href="tel:+61415377409">+61 415 377 409</a></div></li>
+        <li><span class="ico"><svg class="icon"><use href="#i-pin"/></svg></span><div><small>Location</small><span>Victoria, Australia · often in Taranaki, NZ</span></div></li>
+      </ul>
+      <div class="socials">
+        <a class="social" href="https://www.linkedin.com/in/albert-jordaan/" target="_blank" rel="noopener"><svg class="icon solid"><use href="#i-linkedin"/></svg>LinkedIn<svg class="icon"><use href="#i-out"/></svg></a>
+        <a class="social" href="https://github.com/albert203/" target="_blank" rel="noopener"><svg class="icon solid"><use href="#i-github"/></svg>GitHub<svg class="icon"><use href="#i-out"/></svg></a>
+        <a class="social" href="../../../public/assets/files/Albert_Jordaan_CV.pdf" download><svg class="icon"><use href="#i-doc"/></svg>CV</a>
+      </div>
+    </div>
+    <form id="contact-form" novalidate>
+      <div class="row2">
+        <label>Your name<span class="field"><svg class="icon"><use href="#i-user"/></svg><input name="name" autocomplete="name" placeholder="Jane Smith" required></span></label>
+        <label>Email address<span class="field"><svg class="icon"><use href="#i-mail"/></svg><input name="email" type="email" autocomplete="email" placeholder="jane@company.com" required></span></label>
+      </div>
+      <label>Subject<span class="field"><svg class="icon"><use href="#i-tag"/></svg><input name="subject" placeholder="Job opportunity / project enquiry"></span></label>
+      <label>Message<span class="field tall"><svg class="icon"><use href="#i-chat"/></svg><textarea name="message" placeholder="Tell me about the role or project…" required></textarea></span></label>
+      <div class="captcha"><svg class="icon"><use href="#i-shield"/></svg>Cloudflare Turnstile check appears here</div>
+      <button class="btn send" type="submit"><svg class="icon"><use href="#i-send"/></svg>Send message</button>
+      <p class="notice ok" role="status" hidden><svg class="icon"><use href="#i-check"/></svg><span>Message sent. I'll get back to you soon. (Prototype: sending is wired up in the real build.)</span></p>
+    </form>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="livery" aria-hidden="true"><span style="background:var(--purple)"></span><span style="background:var(--teal)"></span><span style="background:var(--rose)"></span><span style="background:var(--blue)"></span><span style="background:var(--red)"></span><span style="background:var(--green)"></span><span style="background:var(--amber)"></span></div>
+  <div class="foot-row">
+    <div><a class="name" href="#top">Albert Jordaan</a><p>Full-stack developer&ensp;·&ensp;Australia and New Zealand&ensp;·&ensp;Open to work wherever it is</p></div>
+    <nav aria-label="Footer"><ul><li><a href="#lines">Work</a></li><li><a href="#experience">Experience</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+    <div class="foot-icons">
+      <a href="https://www.linkedin.com/in/albert-jordaan/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg class="icon solid"><use href="#i-linkedin"/></svg></a>
+      <a href="https://github.com/albert203/" aria-label="GitHub" target="_blank" rel="noopener"><svg class="icon solid"><use href="#i-github"/></svg></a>
+      <a href="mailto:albert.jordaan@outlook.com" aria-label="Email"><svg class="icon"><use href="#i-mail"/></svg></a>
+    </div>
+  </div>
+  <div class="foot-base"><span>© 2026 Albert Jordaan</span><a href="#top">Back to top <svg class="icon" style="width:.9rem;height:.9rem;vertical-align:-.1em"><use href="#i-up"/></svg></a></div>
+</footer>
+
+<script>
+  // ---- System map: three projects, each in its own zone ----
+  const ZONES = [
+    { name: 'Microkeeper · 2024–2026', x: 30, y: 40, w: 730, h: 880, tint: '0,103,177' },
+    { name: 'signalSEO · 2026–now', x: 790, y: 40, w: 645, h: 500, tint: '107,63,160' },
+    { name: 'NFE · Oct 2026–now', x: 790, y: 580, w: 645, h: 340, tint: '176,48,106' },
+  ];
+  const HUBS = [[360, 480], [1140, 260], [840, 740]];
+  const LINES = [
+    // Microkeeper
+    { c: 'red', d: 'M360 830 V150' },
+    { c: 'blue', d: 'M360 480 H600 L660 420 V280' },
+    { c: 'blue', d: 'M600 480 L660 540 V680' },
+    { c: 'green', d: 'M360 480 L280 400 H110' },
+    { c: 'amber', d: 'M360 480 L280 560 H110' },
+    // signalSEO
+    { c: 'purple', d: 'M830 160 H1040 L1140 260 H1370' },
+    { c: 'purple', d: 'M1140 260 L1230 350 H1360' },
+    { c: 'teal', d: 'M1140 90 V470 H1340' },
+    // NFE
+    { c: 'rose', d: 'M840 740 H1370' },
+    { c: 'rose', d: 'M1110 740 L1190 660 H1350' },
+    { c: 'rose', d: 'M840 740 L940 840 H1340' },
+  ];
+  // [x, y, label, label side t|b|l|r, note]
+  const STOPS = [
+    [360, 150, 'Analytics dashboard', 'r', 'Configurable real-time dashboard on Chart.js.', 1],
+    [360, 300, 'Pages 50s → 3s', 'r', 'Indexes and reworked queries took key pages from about 50 seconds to 3.', 1],
+    [360, 650, 'Indexes', 'r', 'Rebuilt to match how the modules actually query.', 1],
+    [360, 830, 'MySQL', 'r', 'The data underneath the payroll platform.', 1],
+    [450, 480, 'OAuth 2.0', 'b', 'Secure connection to each business\'s accounting account.'],
+    [540, 480, 'Accounting API', 't', 'One integration layer for two accounting suites.'],
+    [660, 280, 'Xero', 't', 'Pay runs post straight to Xero.', 1],
+    [660, 680, 'Reckon', 'b', 'Pay runs post straight to Reckon.', 1],
+    [230, 400, 'Upload API', 't', 'Upload, update and delete with no manual handling.'],
+    [110, 400, 'Cloudflare Images', 'b', 'Profile pictures for thousands of users.'],
+    [230, 560, 'Skills HR', 'b', 'Skills and documents reviewed in one place.'],
+    [110, 560, 'Super funds', 't', 'Workflow redesign and UI/UX overhaul.'],
+    [830, 160, 'Website', 't', 'An owner pastes their website.'],
+    [930, 160, 'Site scraping', 'b', 'Scrapes both sites: pages, copy and screenshots.'],
+    [1020, 160, 'Google rankings', 't', 'Live rankings, maps and reviews from Google.'],
+    [1230, 260, 'Claude drafts', 't', 'AI writes the copy for each recommended fix.'],
+    [1300, 260, 'Quality checks', 'b', 'Every AI draft must pass checks before it\'s shown.'],
+    [1370, 260, 'Weekly fixes', 't', 'A short list of what to do this week.'],
+    [1250, 350, 'Stripe', 'b', 'Subscriptions and checkout, card details kept off the server.'],
+    [1360, 350, 'A$ / NZ$', 'b', 'Pricing in two currencies, monthly or yearly.'],
+    [1140, 90, 'Nightly checks', 'r', 'Every tracked search re-checked automatically each night.', 1],
+    [1140, 400, 'Rank alerts', 'l', 'Owners are told when they or a rival move.', 1],
+    [1220, 470, 'AI answers', 'b', 'Tracks what Google\'s AI answer says and who it cites.'],
+    [1340, 470, 'Weekly digest', 'b', 'A summary email every week.'],
+    [960, 740, '60 UAT tests', 'b', 'Ran 60 user acceptance tests and reported to the owner daily.'],
+    [1070, 740, 'Bug fixes', 'b', 'Fixed what testing found with Claude Code, reviewed and tested before merge.'],
+    [1240, 740, 'Role guides', 'b', 'In-app guides for participants, tutors and admins.'],
+    [1370, 740, 'Public site', 'b', 'Reworked the homepage, training, register and sign-in pages.'],
+    [1200, 660, 'Design system', 't', 'One set of labels, icons and tables for every role.'],
+    [1350, 660, 'Design board', 't', 'An admin page that draws every shared piece live.'],
+    [1030, 840, 'Support desk', 'b', 'A hidden desk where NFE support can look up an account and fix it.'],
+    [1200, 840, 'Sign-in fixes', 'b', 'Send a sign-in link, unlock an account, or change an email with a second check.'],
+    [1340, 840, 'Audit log', 'b', 'Every support action is recorded against the person who did it.'],
+  ];
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.querySelector('.map');
+  const el = (tag, attrs, text, parent = svg) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (text) n.textContent = text; parent.appendChild(n); return n; };
+  const motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (motion) document.documentElement.classList.add('motion');
+
+  ZONES.forEach((z) => {
+    el('rect', { x: z.x, y: z.y, width: z.w, height: z.h, rx: 22, class: 'zone', fill: `rgba(${z.tint},.07)`, stroke: `rgba(${z.tint},.45)` });
+    const g = el('g', { class: 'tab' });
+    const pill = el('rect', { x: z.x + 20, y: z.y - 19, width: 200, height: 38, rx: 19 }, null, g);
+    const label = el('text', { x: z.x + 42, y: z.y + 6 }, z.name, g);
+    document.fonts.ready.then(() => pill.setAttribute('width', label.getComputedTextLength() + 44));
+  });
+  LINES.forEach((l, i) => {
+    const p = el('path', { class: 'line', d: l.d, style: `stroke:var(--${l.c})` });
+    p.style.setProperty('--len', Math.ceil(p.getTotalLength()));
+    p.style.setProperty('--delay', (i * 0.1) + 's');
+  });
+  HUBS.forEach(([x, y]) => el('circle', { class: 'hub', cx: x, cy: y, r: 24, 'aria-hidden': 'true' }));
+  STOPS.forEach(([x, y, label, side, note, across]) => {
+    el('circle', { class: 'platform', cx: x, cy: y, r: 13, tabindex: 0, 'data-tip': note, 'aria-label': `${label}: ${note}` });
+    const gap = 13;
+    const [dx, dy, anchor] = { t: [0, -gap - 11, 'middle'], b: [0, gap + 23, 'middle'], r: [gap + 12, 6, 'start'], l: [-gap - 12, 6, 'end'] }[side];
+    el('text', { x: x + dx, y: y + dy, 'text-anchor': anchor, 'aria-hidden': 'true' }, label);
+  });
+  // one train per system: Microkeeper accounting line, signalSEO report line, NFE main line
+  if (motion) [[1, 6], [5, 8], [8, 7]].forEach(([line, dur]) => {
+    const train = el('circle', { class: 'train', r: 8 });
+    const am = document.createElementNS(NS, 'animateMotion');
+    am.setAttribute('dur', dur + 's'); am.setAttribute('repeatCount', 'indefinite'); am.setAttribute('path', LINES[line].d);
+    train.appendChild(am);
+  });
+
+  const wrap = document.querySelector('.map-wrap'), tipBox = document.querySelector('.tip');
+  const show = (stop) => {
+    tipBox.textContent = stop.dataset.tip;
+    const st = stop.getBoundingClientRect(), w = wrap.getBoundingClientRect();
+    tipBox.style.left = Math.min(st.left - w.left + wrap.scrollLeft - 20, wrap.scrollWidth - 300) + 'px';
+    tipBox.style.top = (st.bottom - w.top + 10) + 'px';
+    tipBox.classList.add('on');
+  };
+  svg.querySelectorAll('.platform').forEach((stop) => {
+    stop.addEventListener('mouseenter', () => show(stop));
+    stop.addEventListener('focus', () => show(stop));
+    stop.addEventListener('mouseleave', () => tipBox.classList.remove('on'));
+    stop.addEventListener('blur', () => tipBox.classList.remove('on'));
+  });
+
+  // ---- Viewers: stations switch views (or seek chapters); the fill runs along the line ----
+  document.querySelectorAll('[data-viewer]').forEach((v) => {
+    const slides = [...v.querySelectorAll('.slide')];
+    const stops = [...v.querySelectorAll('.stations button')];
+    const rail = v.querySelector('.rail'), caption = v.querySelector('.caption'), play = v.querySelector('.play');
+    const chapters = v.querySelector('video[data-chapters]');   // one video; stations seek into it
+    const times = stops.map((b) => +b.dataset.t || 0);
+    const DWELL = 7000;
+    let i = 0, playing = motion, inView = false, hold = false, elapsed = 0, last = 0, raf = 0;
+
+    const media = () => chapters || slides[i].querySelector('video');
+    const active = () => playing && inView && !hold;
+    const mark = () => {
+      stops.forEach((b, n) => { b.toggleAttribute('aria-current', n === i); b.classList.toggle('done', n < i); });
+      caption.textContent = stops[i].dataset.note;
+    };
+    const frac = () => {
+      const m = media();
+      if (chapters) {
+        const t = m.currentTime, k = Math.max(0, times.findLastIndex((x) => t >= x));
+        if (k !== i) { i = k; mark(); }
+        const next = times[k + 1] ?? (m.duration || t + 1);
+        return Math.min(1, (t - times[k]) / (next - times[k]));
+      }
+      if (m) return m.duration ? m.currentTime / m.duration : 0;
+      return Math.min(1, elapsed / DWELL);
+    };
+    const frame = (now) => {
+      raf = 0;
+      if (active() && !media()) elapsed += last ? now - last : 0;
+      last = active() ? now : 0;
+      const f = frac();
+      rail.style.setProperty('--p', ((i + f) / stops.length * 100) + '%');
+      stops.forEach((b, n) => b.style.setProperty('--f', (n < i ? 100 : n === i ? f * 100 : 0) + '%'));
+      if (active() && !chapters && f >= 1) return go(i + 1);
+      if (active()) raf = requestAnimationFrame(frame);
+    };
+    const run = () => {
+      const m = media();
+      if (m) { if (active()) m.play().catch(() => {}); else m.pause(); }
+      v.classList.toggle('paused', !playing);
+      v.classList.toggle('holding', hold && playing);
+      play.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
+    const go = (n) => {
+      i = (n + stops.length) % stops.length; elapsed = 0; last = 0;
+      if (chapters) chapters.currentTime = times[i];
+      else slides.forEach((s, k) => {
+        s.classList.toggle('on', k === i); s.inert = k !== i;
+        const vid = s.querySelector('video');
+        if (vid) { vid.pause(); if (k === i) vid.currentTime = 0; }
+      });
+      closeNote(); mark(); run();
+    };
+
+    // annotation pins: hover or focus to read; the viewer holds still meanwhile
+    const note = v.querySelector('.note');
+    const closeNote = () => { if (!note) return; note.classList.remove('on'); v.querySelectorAll('.pin[aria-expanded]').forEach((p) => p.removeAttribute('aria-expanded')); };
+    v.querySelectorAll('.pin').forEach((p) => {
+      p.setAttribute('aria-label', `Note ${p.textContent}: ${p.dataset.note}`);
+      const open = () => {
+        closeNote(); note.textContent = p.dataset.note; p.setAttribute('aria-expanded', 'true');
+        const box = v.getBoundingClientRect(), r = p.getBoundingClientRect();
+        note.style.left = Math.max(0, Math.min(r.left - box.left + r.width / 2 - 136, box.width - note.offsetWidth)) + 'px';
+        const below = r.bottom - box.top + 10, screenH = v.querySelector('.screen').offsetHeight;
+        note.style.top = (below + note.offsetHeight > screenH ? r.top - box.top - 10 - note.offsetHeight : below) + 'px';
+        note.classList.add('on');
+      };
+      p.addEventListener('mouseenter', open); p.addEventListener('focus', open); p.addEventListener('click', open);
+      p.addEventListener('mouseleave', closeNote); p.addEventListener('blur', closeNote);
+    });
+
+    const screen = v.querySelector('.screen');
+    screen.insertAdjacentHTML('beforeend', '<span class="hold" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M6 4h3v12H6zM11 4h3v12h-3z"/></svg>Paused · move away to play</span>');
+    screen.addEventListener('pointerenter', () => { hold = true; run(); });
+    screen.addEventListener('pointerleave', () => { hold = false; run(); });
+    screen.addEventListener('focusin', () => { hold = true; run(); });
+    screen.addEventListener('focusout', () => { hold = false; run(); });
+    play.addEventListener('click', () => { playing = !playing; run(); });
+    stops.forEach((b, n) => b.addEventListener('click', () => go(n)));
+    if (chapters) chapters.addEventListener('ended', () => go(0));
+    new IntersectionObserver(([e]) => { inView = e.isIntersecting; run(); }, { threshold: 0.35 }).observe(v);
+    go(0);
+  });
+
+  // ---- Contact (prototype) ----
+  document.getElementById('contact-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = e.currentTarget;
+    if (!f.reportValidity()) return;
+    f.querySelector('.notice.ok').hidden = false;
+  });
+
+  const links = [...document.querySelectorAll('.nav ul a')];
+  const spy = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (e.isIntersecting) links.forEach((a) => a.toggleAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  ['lines', 'experience', 'about', 'contact'].forEach((id) => spy.observe(document.getElementById(id)));
+</script>
+</body>
+</html>

@@ -5,9 +5,15 @@ import express from 'express';
 import path from 'path';
 import { handleContact, type ContactEnv } from './contact/handler';
 import { TURNSTILE_TEST_SECRET_KEY, TURNSTILE_TEST_SITE_KEY } from './contact/turnstile';
+import { redirectTarget } from './redirect';
 
 // Local development only: production is static files + the Cloudflare Worker (src/worker.ts)
 const app = express();
+app.use((req, res, next) => {
+  const target = redirectTarget(process.env.REDIRECT_TO, req.originalUrl);
+  if (target) return res.redirect(301, target);
+  next();
+});
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 

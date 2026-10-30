@@ -8,14 +8,17 @@ const root = path.resolve(__dirname, '../..');
 let outDir: string;
 let written: string[];
 
-beforeAll(async () => {
-  outDir = await fs.mkdtemp(path.join(os.tmpdir(), 'site-'));
-  written = await renderSite({
+const build = (dir: string, locals: Record<string, unknown>) =>
+  renderSite({
     viewsDir: path.join(root, 'public/views'),
     publicDir: path.join(root, 'public'),
-    outDir,
-    locals: { turnstileSiteKey: 'site-key-xyz' },
+    outDir: dir,
+    locals,
   });
+
+beforeAll(async () => {
+  outDir = await fs.mkdtemp(path.join(os.tmpdir(), 'site-'));
+  written = await build(outDir, { turnstileSiteKey: 'site-key-xyz' });
 });
 
 afterAll(async () => {
@@ -35,30 +38,48 @@ describe('renderSite', () => {
     }
   });
 
-  it('inlines the header partial with a direct CV download link', async () => {
+  it('links the CV as a direct download', async () => {
     const html = await read('index.html');
     expect(html).toContain('href="/assets/files/Albert_Jordaan_CV.pdf" download');
     expect(html).not.toContain('/resume/download');
   });
 
-  it('uses absolute asset paths so nested pages resolve them', async () => {
+  it('uses absolute paths so nested pages resolve them', async () => {
     for (const page of PAGES) {
-      const html = await read(page.out);
-      expect(html).toContain('href="/css/styles.css"');
-      expect(html).not.toContain('../');
+      expect(await read(page.out)).not.toContain('../');
     }
+    const home = await read('index.html');
+    expect(home).toContain('href="/css/styles.css"');
+    expect(home).toContain('src="/js/script.js"');
   });
 
-  it('renders the Turnstile widget with the given site key on the contact page', async () => {
-    const html = await read('contact/index.html');
+  it('puts the contact form, with the Turnstile widget and error box, on the home page', async () => {
+    const html = await read('index.html');
+    expect(html).toContain('id="contact_form"');
     expect(html).toContain('data-sitekey="site-key-xyz"');
     expect(html).toContain('challenges.cloudflare.com/turnstile/v0/api.js');
     expect(html).toContain('id="form_error"');
   });
 
-  it('copies static assets', async () => {
-    await expect(fs.stat(path.join(outDir, 'css/styles.css'))).resolves.toBeTruthy();
-    await expect(fs.stat(path.join(outDir, 'js/script.js'))).resolves.toBeTruthy();
-    await expect(fs.stat(path.join(outDir, 'assets/files/Albert_Jordaan_CV.pdf'))).resolves.toBeTruthy();
+  it('sends the old /contact and /resume pages to their sections on the home page', async () => {
+    expect(await read('contact/index.html')).toContain('url=/#contact');
+    expect(await read('resume/index.html')).toContain('url=/#experience');
+  });
+
+  it('copies static assets, including the project videos', async () => {
+    for (const rel of [
+      'css/styles.css',
+      'js/script.js',
+      'assets/files/Albert_Jordaan_CV.pdf',
+      'assets/videos/signal-ride.mp4',
+      'assets/videos/nfe-ride.mp4',
+      'assets/videos/Dashboard_video_optimised.mp4',
+    ]) {
+      await expect(fs.stat(path.join(outDir, rel))).resolves.toBeTruthy();
+    }
+  });
+
+  it('shows the NFE recording', async () => {
+    expect(await read('index.html')).toContain('/assets/videos/nfe-ride.mp4');
   });
 });

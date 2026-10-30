@@ -16,7 +16,7 @@ Recruiters and hiring managers filling junior-to-mid full-stack developer roles.
 
 ## Product Purpose
 
-Personal portfolio and résumé site for Albert Jordaan, full-stack developer in Victoria, Australia. It exists to get Albert shortlisted for a full-time junior–mid full-stack role. Success: a recruiter leaves convinced of real, shipped impact and either downloads the CV or makes contact.
+Personal portfolio and résumé site for Albert Jordaan, full-stack developer; NZ citizen and Australian resident with an Australian address (Victoria), often in Taranaki, NZ, so the address on each CV varies. Open to work wherever it is. It exists to get Albert shortlisted for a full-time junior–mid full-stack role. Success: a recruiter leaves convinced of real, shipped impact and either downloads the CV or makes contact.
 
 ## Positioning
 
@@ -44,9 +44,13 @@ Name: Albert Jordaan. Existing site and CV use a blue accent (#0052ff); not conf
 ## Evidence on Hand
 
 - Project screen recordings: `public/assets/videos/` (Analytics Dashboard, Skills HR module, E-commerce). User confirmed Microkeeper screens may be shown publicly; scan for customer data before publishing.
-- CV: `public/assets/files/Albert_Jordaan_CV.pdf`. Verified claims: 10x+ faster load times from query optimisation; Cloudflare Images pipeline for thousands of users; Xero and Reckon integrations; Chart.js real-time analytics dashboard; Google Maps registration flow; React MUI UI work.
+- CV: `public/assets/files/Albert_Jordaan_CV.pdf`. Verified claims: key page loads cut from ~50s to ~3s (10x+) for businesses with up to 10,000 employees from query optimisation; Cloudflare Images pipeline for thousands of users; Xero and Reckon integrations; Chart.js real-time analytics dashboard; Google Maps registration flow; React MUI UI work.
 - Further CV projects without media yet: Cost Centre Tracking, Self Managed Super Funds rework, Custom Business Onboarding Welcome Letter, Accounting Suite integration, Profile Picture Support.
-- AI automation and AI-assisted development: no project, metric, or artefact on hand yet. Do not present as shipped work until the user supplies examples (workflows, tools, before/after time saved).
+- Most recent work (lead the site with these):
+  - signalSEO (Mar 2026 – now): Albert's own product, built solo (516 commits). Local SEO reports for AU/NZ businesses; Claude drafts fixes that pass checks before showing; nightly automated rank checks; Stripe subscriptions in A$/NZ$. Screenshots: `.impeccable/captures/signalseo/` (dashboard shots show real third-party competitor domains from a test account).
+  - NFE training platform (Oct 2026 – now, contract): role per CV is Software Tester & AI-Assisted Developer. Ran 60 UAT cases with daily reports to the owner; fixes and approved UI changes shipped with Claude Code (public homepage, training, register and sign-in reworks); shared design system (DESIGN.md + design board page); in-app role guides; support desk with sign-in-as permission, sign-in fixes and audit logging (git log Oct 2026). Do not call him a core developer. NFE has agreed to its public site recording being shown (confirmed by Albert, 2026-10-31).
+- AI automation evidence: signalSEO's Claude-drafted, checked fixes and its nightly automated jobs. Other AI-assisted development examples still to be supplied.
+- Earlier note on AI automation (superseded above): no project, metric, or artefact on hand yet. Do not present as shipped work until the user supplies examples (workflows, tools, before/after time saved).
 - Absent: testimonials, exact before/after timings, user counts beyond "thousands", personal About-me content, and a photo. Do not fabricate. "25+ projects shipped" is unverified and must not be reused.
 
 ## Product Principles

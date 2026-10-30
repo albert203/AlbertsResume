@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rework · project notes, About, Now</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800;900&family=Overpass+Mono:wght@500;700&display=swap">
+<style>
+  :root {
+    --ground: #f7f7f4; --panel: #ececea; --ink: #1d1d1b; --ink-soft: #55554f; --rule: #c9c9c3;
+    --blue: #0067b1; --red: #b8321f; --green: #007a51; --amber: #e8a200; --grey: #8a8a84;
+    --purple: #6b3fa0; --teal: #0e7c7b; --rose: #b0306a;
+    --sans: 'Overpass', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'Overpass Mono', ui-monospace, monospace;
+    --gutter: clamp(1.25rem, 4vw, 3.5rem);
+    --ease: cubic-bezier(.16, 1, .3, 1);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--ground); color: var(--ink); font: 400 1.0625rem/1.6 var(--sans); }
+  ::selection { background: var(--amber); color: var(--ink); }
+  h2, h3 { font-weight: 900; line-height: 1; letter-spacing: -.02em; text-wrap: balance; }
+  .mock-note { padding: 1rem var(--gutter); font: 500 .85rem var(--mono); color: var(--ink-soft); border-bottom: 1px solid var(--rule); }
+
+  /* ---------- A. project notes: a line badge, then the bullets as stops on the line ---------- */
+  .route { padding: clamp(3.5rem, 7vw, 6rem) var(--gutter); display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.35fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; border-bottom: 1px solid var(--rule); }
+  .route:nth-of-type(even) { background: var(--panel); }
+  .notes { position: sticky; top: 2rem; }
+  .badge { display: inline-flex; align-items: stretch; border-radius: 2rem; overflow: hidden; box-shadow: 0 10px 24px -16px rgba(29,29,27,.6); }
+  .badge b { display: flex; align-items: center; gap: .55rem; padding: .5rem 1rem .45rem .55rem; background: var(--line); color: #fff; font-weight: 900; font-size: 1.05rem; }
+  .badge b::before { content: ""; width: 1.25rem; height: 1.25rem; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 4px var(--ink); }
+  .badge span { display: flex; align-items: center; padding: .6rem 1.1rem .55rem; background: #fff; font: 700 .85rem var(--mono); color: var(--ink); }
+  .notes h3 { line-height: 1.05; font-size: clamp(2rem, 3.4vw, 2.8rem); margin: 1.2rem 0 .9rem; }
+  .lede { font-size: 1.15rem; line-height: 1.55; color: var(--ink); max-width: 46ch; }
+  .stops { list-style: none; padding: 0; margin: 1.8rem 0 0; position: relative; }
+  .stops::before { content: ""; position: absolute; left: 9px; top: .7rem; bottom: .7rem; width: 6px; border-radius: 6px; background: var(--line); }
+  .stops li { position: relative; padding: 0 0 1.15rem 2.4rem; }
+  .stops li:last-child { padding-bottom: 0; }
+  .stops li::before { content: ""; position: absolute; left: 0; top: .3rem; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 4.5px var(--ink); transition: background .2s, transform .25s var(--ease); }
+  .stops li:hover::before { background: var(--amber); transform: scale(1.15); }
+  .stops strong { display: block; font-weight: 800; line-height: 1.3; }
+  .stops span { display: block; color: var(--ink-soft); font-size: .97rem; line-height: 1.5; margin-top: .15rem; }
+  .platforms { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.8rem; padding: 0; list-style: none; }
+  .platforms li { padding: .45rem .8rem; border-radius: .4rem; background: #fff; box-shadow: inset 0 0 0 1.5px var(--rule); font: 700 .8rem var(--mono); color: var(--ink-soft); }
+  .screen { aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px rgba(29,29,27,.12), 0 28px 60px -34px rgba(29,29,27,.5); }
+  .screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+  /* ---------- B. About + Now ---------- */
+  .station { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5.5rem); padding: clamp(4rem, 9vw, 7rem) var(--gutter); background: var(--panel); align-items: start; }
+  .station h2 { font-size: clamp(2.2rem, 4.5vw, 3.6rem); margin-bottom: 1.4rem; }
+  .statement { font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 800; line-height: 1.32; letter-spacing: -.01em; max-width: 22ch; text-wrap: balance; }
+  .statement em { font-style: normal; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--blue) 26%, transparent) 62%); }
+  .about p.more { margin-top: 1.2rem; color: var(--ink-soft); max-width: 52ch; }
+  .facts { margin-top: 2rem; display: grid; gap: .1rem; max-width: 34rem; }
+  .facts div { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: .6rem; padding: .55rem 0; }
+  .facts dt { font: 700 .82rem var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
+  .facts div::after { content: ""; order: 2; border-bottom: 2px dotted var(--rule); transform: translateY(-.25rem); }
+  .facts dd { order: 3; margin: 0; font-weight: 800; text-align: right; }
+  .facts dt { order: 1; }
+  .pending { display: inline-block; margin-top: 1.4rem; font: 500 .78rem var(--mono); color: var(--red); }
+
+  /* departure board: the page's one dark moment */
+  .board { background: #151513; color: #f2efe6; border-radius: 18px; padding: 1.4rem 1.5rem 1.2rem; box-shadow: 0 30px 60px -30px rgba(0,0,0,.55); position: relative; overflow: hidden; }
+  .board::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, rgba(255,255,255,.025) 3px 4px); }
+  .board header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid #34342f; }
+  .board h2 { color: #fff; font-size: 1.6rem; margin: 0; display: flex; align-items: center; gap: .7rem; }
+  .live { width: .7rem; height: .7rem; border-radius: 50%; background: #3ddc84; }
+  .board header small { font: 500 .78rem var(--mono); color: #a9a69b; }
+  .rows { list-style: none; padding: 0; margin: 0; }
+  .rows li { display: grid; grid-template-columns: 5.2rem 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #2a2a26; align-items: start; }
+  .rows li:last-child { border-bottom: 0; }
+  .when { font: 700 .82rem var(--mono); letter-spacing: .06em; color: var(--amber); padding-top: .2rem; }
+  .what { display: grid; gap: .2rem; }
+  .what b { font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; gap: .55rem; }
+  .what b i { width: 1.4rem; height: .45rem; border-radius: 1rem; background: var(--c, #6d6b63); flex: none; }
+  .what span { color: #bdb9ad; font-size: .95rem; line-height: 1.45; }
+  .board .cta { display: inline-flex; margin-top: 1rem; align-items: center; gap: .5rem; padding: .7rem 1.1rem; border-radius: 2rem; background: var(--amber); color: var(--ink); font-weight: 800; text-decoration: none; font-size: .95rem; }
+
+  @media (max-width: 900px) {
+    .route, .station { grid-template-columns: 1fr; }
+    .notes { position: static; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<p class="mock-note">Mockup: reworked Work projects notes for all three projects (A), then About + Now (B). The Experience table is unchanged. Same tokens as network-diagram.html.</p>
+
+<section class="route" style="--line:var(--purple)">
+  <div class="notes">
+    <div class="badge"><b>signalSEO</b><span>2026 – now · Founder</span></div>
+    <h3>My own product</h3>
+    <p class="lede">SEO and business-positioning software that shows local businesses where they stand, what they're doing wrong and how to fix it, then keeps watch, so they rank better without the guesswork and get back to running their business.</p>
+    <ol class="stops">
+      <li><strong>Understand</strong><span>A plain-English report on where they rank, who's beating them, and why.</span></li>
+      <li><strong>Monitor</strong><span>Rankings checked every night, plus rival moves and what Google's AI answer says.</span></li>
+      <li><strong>Control</strong><span>A short list of fixes for the week, drafted by Claude and checked before anyone sees it.</span></li>
+      <li><strong>Built solo</strong><span>LLM integration, data pipelines and Stripe billing, with over 100 automated test files.</span></li>
+    </ol>
+    <ul class="platforms" aria-label="Stack"><li>TypeScript</li><li>Node</li><li>Express</li><li>PostgreSQL</li><li>Claude API</li><li>Firecrawl</li><li>DataForSEO</li><li>Stripe</li></ul>
+  </div>
+  <div class="screen"><img src="../../captures/signalseo/signal-ride-poster.webp" alt="signalSEO homepage"></div>
+</section>
+
+<section class="route" style="--line:var(--rose)">
+  <div class="notes">
+    <div class="badge"><b>NFE</b><span>Oct 2026 – now · Contract</span></div>
+    <h3>Testing and improving a live platform</h3>
+    <p class="lede">A training platform that takes beauty therapists from application to certificate. I test it, fix what I find and ship approved changes using Claude Code.</p>
+    <ol class="stops">
+      <li><strong>60 acceptance tests</strong><span>Then automated the click-through checks with AI agents and Playwright.</span></li>
+      <li><strong>Public site rework</strong><span>Homepage, training, register and sign-in pages, to an approved design.</span></li>
+      <li><strong>One design system</strong><span>Labels, icons and tables that look the same for every role.</span></li>
+      <li><strong>Support desk</strong><span>Staff can fix sign-in problems, and every action is logged.</span></li>
+    </ol>
+    <ul class="platforms" aria-label="Stack"><li>TypeScript</li><li>Claude Code</li><li>Playwright</li><li>Clerk</li><li>Replit</li></ul>
+  </div>
+  <div class="screen"><img src="../../captures/nfe/nfe-ride-hd-poster.webp" alt="NFE homepage"></div>
+</section>
+
+<section class="route" style="--line:var(--blue)">
+  <div class="notes">
+    <div class="badge"><b>Microkeeper</b><span>2024 – 2026 · Full stack</span></div>
+    <h3>Payroll, connected and faster</h3>
+    <p class="lede">Two years on a payroll and workforce platform, taking small modules from requirements through to release and checking them in production.</p>
+    <ol class="stops">
+      <li><strong>Xero and Reckon</strong><span>Connected both accounting suites, so pay runs reach the books without anyone re-typing them.</span></li>
+      <li><strong>50 seconds to 3</strong><span>Indexes and reworked queries sped up key pages for businesses with up to 10,000 staff.</span></li>
+      <li><strong>Process automation</strong><span>A profile image pipeline on Cloudflare Images for thousands of users, and onboarding letters from templates.</span></li>
+      <li><strong>Skills HR and Super Funds</strong><span>Reworked layout and workflow, including on phones.</span></li>
+    </ol>
+    <ul class="platforms" aria-label="Stack"><li>PHP</li><li>MySQL</li><li>JavaScript</li><li>REST APIs</li><li>OAuth</li><li>Chart.js</li><li>Cloudflare Images</li></ul>
+  </div>
+  <div class="screen"><video src="../../../public/assets/videos/Dashboard_video_optimised.mp4" muted autoplay loop playsinline aria-label="Analytics dashboard screen recording" style="display:block;width:100%;height:100%;object-fit:contain;background:#fff"></video></div>
+</section>
+
+<section class="station" id="about">
+  <div class="about">
+    <h2>About</h2>
+    <p class="statement">I'm happiest where systems meet, <em>turning slow, manual work into software</em> that just runs.</p>
+    <p class="more">I'm a full-stack developer who splits my time between Australia and New Zealand. I like connecting APIs, speeding up slow data, and making the screens people use every day easier to get through.</p>
+    <dl class="facts">
+      <div><dt>Based in</dt><dd>Victoria, Australia</dd></div>
+      <div><dt>Often in</dt><dd>Taranaki, New Zealand</dd></div>
+      <div><dt>Work rights</dt><dd>Australia and New Zealand</dd></div>
+      <div><dt>Studied</dt><dd>Bachelor of IT, Otago Polytechnic</dd></div>
+      <div><dt>Testing</dt><dd>ISTQB Foundation, in progress</dd></div>
+      <div><dt>Looking for</dt><dd>Full-time, wherever the work is</dd></div>
+    </dl>
+    <span class="pending">A line or two of your own (outside work) would go here</span>
+  </div>
+
+  <div class="board" aria-labelledby="now-title">
+    <header><h2 id="now-title"><span class="live" aria-hidden="true"></span>Now</h2><small>Updated October 2026</small></header>
+    <ol class="rows">
+      <li><span class="when">NOW</span><div class="what"><b><i style="--c:var(--purple)"></i>signalSEO</b><span>Getting it ready to launch: last fixes, guides and pricing.</span></div></li>
+      <li><span class="when">NOW</span><div class="what"><b><i style="--c:var(--rose)"></i>NFE&ensp;·&ensp;contract</b><span>Testing the platform and shipping approved changes with Claude Code.</span></div></li>
+      <li><span class="when">DAILY</span><div class="what"><b><i style="--c:var(--teal)"></i>Claude Code and Copilot</b><span>I read and test everything they write before it ships.</span></div></li>
+      <li><span class="when">NEXT</span><div class="what"><b><i style="--c:var(--amber)"></i>A full-time role</b><span>Full-stack, automation or AI work. I'll go where the work is.</span></div></li>
+    </ol>
+    <a class="cta" href="#contact">Get in touch</a>
+  </div>
+</section>
+</body>
+</html>

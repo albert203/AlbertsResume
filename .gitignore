@@ -4,3 +4,5 @@ dist/
 .superpowers/
 .dev.vars*
 .wrangler/
+.playwright-mcp/
+.impeccable/captures/
