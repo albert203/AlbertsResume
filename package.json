@@ -9,7 +9,7 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "dev:worker": "npm run build:site && wrangler dev",
-    "deploy": "npm run build:site && wrangler deploy",
+    "deploy": "npm run build:site -- --production && wrangler deploy",
     "build:site": "ts-node src/build/cli.ts"
   },
   "keywords": [],
