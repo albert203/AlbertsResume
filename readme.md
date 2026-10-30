@@ -1,6 +1,6 @@
 # Portfolio Site
 
-Built using Node.js - ExpressJS, TypeScript, EJS, and Nodemailer.
+Built with TypeScript and EJS, hosted on Cloudflare Workers.
 
 ## Features
 
