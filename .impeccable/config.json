@@ -1,0 +1,44 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/8626-1793355447/content/design-direction.html"
+        ],
+        "createdAt": "2026-10-30T10:18:22.842Z",
+        "reason": "Claude: brainstorm thumbnail mockups deliberately scaled down inside comparison cards; not shipped UI"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/8626-1793355447/content/design-direction.html"
+        ],
+        "createdAt": "2026-10-30T10:18:37.263Z",
+        "reason": "Claude: brainstorm thumbnail mockups deliberately scaled down inside comparison cards; not shipped UI"
+      },
+      {
+        "rule": "overused-font",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/canon.html"
+        ],
+        "createdAt": "2026-10-30T10:29:01.183Z",
+        "reason": "Claude: canon card deliberately renders the category-standard portfolio (Geist, large sentence hero) as the comparison baseline"
+      },
+      {
+        "rule": "oversized-h1",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/decision/canon.html"
+        ],
+        "createdAt": "2026-10-30T10:29:01.928Z",
+        "reason": "Claude: canon card deliberately renders the category-standard portfolio (Geist, large sentence hero) as the comparison baseline"
+      }
+    ]
+  }
+}
