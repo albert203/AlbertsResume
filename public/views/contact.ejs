@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Albert Jordaan - Contact Me</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <style>
@@ -31,7 +32,9 @@
     .form_textarea { resize: vertical; min-height: 140px; }
     .form_submit { align-self: flex-start; }
     .form_success { display: none; padding: 1rem; background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.3); border-radius: 8px; color: #16a34a; font-size: 0.88rem; }
+    .form_error { display: none; padding: 1rem; background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.3); border-radius: 8px; color: #b91c1c; font-size: 0.88rem; }
   </style>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -68,7 +71,7 @@
         </div>
 
         <!-- Right: form -->
-        <form class="contact_form" id="contact_form" method="post" action="/contact">
+        <form class="contact_form" id="contact_form" method="post" action="/api/contact">
           <div class="form_group">
             <label class="form_label" for="name">Your name</label>
             <input class="form_input" type="text" id="name" name="name" placeholder="John Smith" required />
@@ -85,7 +88,9 @@
             <label class="form_label" for="message">Message</label>
             <textarea class="form_input form_textarea" id="message" name="message" placeholder="Tell me about the role or project..." required></textarea>
           </div>
-          <div class="form_success" id="form_success">
+          <div class="cf-turnstile" data-sitekey="<%= turnstileSiteKey %>"></div>
+          <div class="form_error" id="form_error" role="alert"></div>
+          <div class="form_success" id="form_success" role="status">
             Message Successfully sent, I'll get back to you very soon!
           </div>
           <button type="submit" class="btn btn_primary form_submit">Send message</button>
