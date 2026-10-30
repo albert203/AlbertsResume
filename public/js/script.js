@@ -64,33 +64,47 @@ sections.forEach(section => observer.observe(section));
 const form = document.getElementById('contact_form');
 
 if (form) {
+  const successBox = document.getElementById('form_success');
+  const errorBox = document.getElementById('form_error');
+
+  const showError = (message) => {
+    errorBox.textContent = message;
+    errorBox.style.display = 'block';
+  };
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.textContent = 'Sending...';
     submitBtn.disabled = true;
+    errorBox.style.display = 'none';
+    successBox.style.display = 'none';
 
     const data = Object.fromEntries(new FormData(form));
 
     try {
-      const res = await fetch('/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       if (res.ok) {
-        document.getElementById('form_success').style.display = 'block';
+        successBox.style.display = 'block';
         form.reset();
         submitBtn.textContent = 'Sent!';
-      } else {
-        submitBtn.textContent = 'Failed — try again';
-        submitBtn.disabled = false;
+        return;
       }
+
+      const body = await res.json().catch(() => ({}));
+      showError(body.error || 'Something went wrong. Please try again.');
     } catch (err) {
-      submitBtn.textContent = 'Failed — try again';
-      submitBtn.disabled = false;
+      showError('Could not reach the server. Check your connection and try again.');
     }
+
+    submitBtn.textContent = 'Send message';
+    submitBtn.disabled = false;
+    if (window.turnstile) window.turnstile.reset();
   });
 }

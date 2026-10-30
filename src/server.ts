@@ -1,79 +1,51 @@
 import dotenv from 'dotenv';
 dotenv.config(); // loads .env file contents
 
-import rateLimit from 'express-rate-limit';
-import express from 'express'; // js runtime
+import express from 'express';
 import path from 'path';
-import { sendEmail } from './mail'; // email sending function
+import { handleContact, type ContactEnv } from './contact/handler';
+import { TURNSTILE_TEST_SECRET_KEY, TURNSTILE_TEST_SITE_KEY } from './contact/turnstile';
 
-// create express instance
+// Local development only: production is static files + the Cloudflare Worker (src/worker.ts)
 const app = express();
-app.set('trust proxy', 1);
-app.use(express.json()); // for json ajax requests
-app.use(express.urlencoded({ extended: true })); // for HTML sending
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
-// rate limiter
-const rateLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // limit to 5 sends per 15 minutes
-  message: 'Too many requests, please try again in 15 minutes.',
-  standardHeaders: true, 
-  legacyHeaders: false,
-});
-
-// assign the view engine to ejs
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../public/views'));
 
-// route for home page
+const locals = { turnstileSiteKey: process.env.TURNSTILE_SITE_KEY || TURNSTILE_TEST_SITE_KEY };
+
+const contactEnv: ContactEnv = {
+  RESEND_API_KEY: process.env.RESEND_API_KEY ?? '',
+  EMAIL_TO: process.env.EMAIL_TO ?? '',
+  EMAIL_FROM: process.env.EMAIL_FROM ?? 'Albert Jordaan <onboarding@resend.dev>',
+  TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY || TURNSTILE_TEST_SECRET_KEY,
+};
+
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', locals);
 });
 
 app.get('/contact', (req, res) => {
-  res.render('contact');
+  res.render('contact', locals);
 });
 
 app.get('/resume', (req, res) => {
-  res.render('resume');
+  res.render('resume', locals);
 });
 
-app.get('/resume/download', (req, res) => {
-    const filePath = path.join(__dirname, '../public/assets/files/Albert_Jordaan_CV.pdf');
-    res.download(filePath, 'Albert_Jordaan_CV.pdf', (err) => {
-      if (err) {
-          console.error(`Resume download error: ${err}`);
-          res.status(500).send(`Error downloading file: ${err}`);
-      }
-    });
-})
-
-// POST 
-app.post('/contact', rateLimiter, async (req, res) => {
-  const { name, email, subject, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
-  // email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ error: 'Invalid email format' });
-  }
-
-  try {
-    await sendEmail(name, email, subject, message);
-    res.json({ success: true });
-  } 
-  catch (err) {
-    console.error('Email error:', err);
-    res.status(500).json({ error: 'Failed to send email' });
-  }
+// same handler the Worker uses, adapted from Express to Request/Response
+app.post('/api/contact', async (req, res) => {
+  const request = new Request(`http://localhost${req.originalUrl}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'cf-connecting-ip': req.ip ?? '' },
+    body: JSON.stringify(req.body ?? {}),
+  });
+  const response = await handleContact(request, contactEnv);
+  res.status(response.status).type('application/json').send(await response.text());
 });
 
-// server lsiten
 app.listen(process.env.PORT, () => {
   console.log(`Server is running: http://localhost:${process.env.PORT}`);
 })
