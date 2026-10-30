@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "albert-portfolio",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist/site",
+    "binding": "ASSETS"
+  },
+  "vars": {
+    "EMAIL_FROM": "Albert Jordaan <onboarding@resend.dev>"
+  }
+  // Secrets, set with `npx wrangler secret put <NAME>`:
+  // RESEND_API_KEY, EMAIL_TO, TURNSTILE_SECRET_KEY
+}

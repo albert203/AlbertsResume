@@ -7,7 +7,9 @@
     "test": "vitest run",
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "dev:worker": "npm run build:site && wrangler dev",
+    "deploy": "npm run build:site && wrangler deploy"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +29,7 @@
     "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2",
-    "vitest": "^3.2.7"
+    "vitest": "^3.2.7",
+    "wrangler": "^4.156.0"
   }
 }
